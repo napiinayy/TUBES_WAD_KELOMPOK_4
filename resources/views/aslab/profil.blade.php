@@ -33,7 +33,7 @@
                         <a class="nav-link" href="/test-kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-profil">Profil</a>
+                        <a class="nav-link active" href="/aslab/profil">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -63,7 +63,7 @@
 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/test-profil">
+                    <form method="POST" action="/aslab/profil">
                         @csrf
                         @method('PUT')
 

@@ -313,13 +313,13 @@ body {
   font-size: 16px;
   line-height: 24px;
   color: #444444;
-  
+
   &:focus {
     outline: none;
     border-color: #08A045;
     box-shadow: 0 0 0 0.25rem rgba(8, 160, 69, 0.25);
   }
-  
+
   &::placeholder {
     color: rgba(0, 0, 0, 0.4);
     font-weight: 400;
@@ -500,16 +500,16 @@ select.form-control {
   background: transparent;
   border: none;
   border-bottom: 3px solid transparent;
-  
+
   &.active {
     color: white;
     border-bottom-color: white;
   }
-  
+
   &:not(.active) {
     color: rgba(0, 0, 0, 0.25);
     border-bottom-color: rgba(0, 0, 0, 0.1);
-    
+
     &:hover {
       color: rgba(255, 255, 255, 0.7);
     }
@@ -525,7 +525,7 @@ select.form-control {
   border-radius: 0.75rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   background-color: white;
-  
+
   .card-header {
     background-color: #f8f9fa;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
@@ -533,11 +533,11 @@ select.form-control {
     padding: 1rem 1.5rem;
     font-weight: 600;
   }
-  
+
   .card-body {
     padding: 1.5rem;
   }
-  
+
   .card-footer {
     background-color: #f8f9fa;
     border-top: 1px solid rgba(0, 0, 0, 0.125);
@@ -591,7 +591,7 @@ select.form-control {
 
 .table-section {
   margin-top: 32px;
-  
+
   .table-header {
     display: flex;
     justify-content: space-between;
@@ -601,7 +601,7 @@ select.form-control {
     border: 1px solid #324D67;
     border-bottom: none;
     border-radius: 12px 12px 0 0;
-    
+
     h3 {
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
@@ -618,12 +618,12 @@ select.form-control {
   border-radius: 0 0 12px 12px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  
+
   &.with-header {
     border-radius: 0 0 12px 12px;
     border-top: none;
   }
-  
+
   &.standalone {
     border-radius: 12px;
   }
@@ -636,10 +636,10 @@ select.form-control {
 .dashboard-table {
   font-family: 'Space Grotesk', sans-serif;
   margin: 0;
-  
+
   thead {
     background-color: #f8f9fa;
-    
+
     th {
       font-weight: 600;
       text-transform: uppercase;
@@ -651,16 +651,16 @@ select.form-control {
       white-space: nowrap;
     }
   }
-  
+
   tbody {
     tr {
       transition: background-color 0.2s ease;
-      
+
       &:hover {
         background-color: rgba(8, 160, 69, 0.05);
       }
     }
-    
+
     td {
       padding: 0.875rem 1rem;
       vertical-align: middle;
@@ -761,13 +761,13 @@ select.form-control {
   transition: all 0.2s ease;
   text-decoration: none;
   margin-left: 4px;
-  
+
   &:hover {
     background: rgba(8, 160, 69, 0.1);
     border-color: #08A045;
     color: #08A045;
   }
-  
+
   &:first-child {
     margin-left: 0;
   }
@@ -788,7 +788,7 @@ select.form-control {
   border: 1px solid #324D67;
   border-bottom: none;
   border-radius: 12px 12px 0 0;
-  
+
   h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
@@ -874,7 +874,7 @@ select.form-control {
   align-items: center;
   gap: 24px;
   margin-bottom: 32px;
-  
+
   .kategori-title {
     color: rgba(0, 0, 0, 0.25);
     font-size: 1.75rem;
@@ -889,7 +889,7 @@ select.form-control {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
-  
+
   .kategori-title {
     color: rgba(0, 0, 0, 0.25);
     font-size: 1.75rem;
@@ -943,7 +943,7 @@ select.form-control {
   border: 1px solid #324D67;
   border-bottom: none;
   border-radius: 12px 12px 0 0;
-  
+
   h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
@@ -971,12 +971,12 @@ select.form-control {
   padding: 4px 12px;
   background: transparent;
   cursor: pointer;
-  
+
   &:focus {
     border-color: #08A045;
     box-shadow: 0 0 0 0.25rem rgba(8, 160, 69, 0.15);
   }
-  
+
   option {
     font-family: 'Space Grotesk', sans-serif;
   }
@@ -1010,14 +1010,14 @@ select.form-control {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  
+
   .activity-date,
   .activity-user {
     color: #6c757d;
     font-size: 14px;
     font-family: 'Inter', sans-serif;
   }
-  
+
   .activity-action {
     color: #dc3545;
     font-size: 14px;
@@ -1075,11 +1075,11 @@ select.form-control {
   color: #6c757d;
   border-bottom: 1px solid rgba(108, 117, 139, 0.1);
   min-height: 45px;
-  
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &.active {
     background: rgba(108, 117, 139, 0.1);
   }
@@ -1125,12 +1125,12 @@ select.form-control {
   text-decoration: none;
   border: 1px solid #08A045;
   transition: all 0.2s ease;
-  
+
   &:hover {
     background: rgba(8, 160, 69, 0.05);
     color: #08A045;
   }
-  
+
   &.active {
     background: #08A045;
     color: white;
@@ -1196,11 +1196,11 @@ select.form-control {
   .login-card {
     margin: 1rem;
   }
-  
+
   .welcome-title {
     font-size: 1.5rem;
   }
-  
+
   .welcome-subtitle {
     font-size: 0.875rem;
   }
@@ -1217,7 +1217,7 @@ select.form-control {
 
   .form-footer {
     flex-direction: column;
-    
+
     .btn {
       width: 100%;
     }
@@ -1251,7 +1251,7 @@ select.form-control {
   position: relative;
   pointer-events: none;
   opacity: 0.6;
-  
+
   &::after {
     content: '';
     position: absolute;
