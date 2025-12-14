@@ -1,0 +1,1275 @@
+// ==========================================
+// FRI LABORATORIUM CUSTOM STYLES
+// Additional styles matching your Figma design
+// ==========================================
+
+// Import Google Fonts - Space Grotesk
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+// ==========================================
+// GLOBAL STYLES
+// ==========================================
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(0deg, #101922, #101922), #FFFFFF;
+  margin: 0;
+  padding: 0;
+}
+
+// ==========================================
+// LAYOUT STRUCTURE
+// ==========================================
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 100vh;
+}
+
+// ==========================================
+// SIDEBAR NAVIGATION
+// ==========================================
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  width: 288px;
+  min-height: 100vh;
+  background: #FFFFFF;
+  flex-shrink: 0;
+
+  .nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .nav-item {
+    width: 100%;
+    height: 40px;
+    position: relative;
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 12px;
+    gap: 12px;
+    width: 100%;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #08A045;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #444444;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(8, 160, 69, 0.05);
+    }
+
+    &.active {
+      background: #08A045;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      display: none; // Hidden by default as per design
+    }
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(50, 77, 103, 0.5);
+    width: 100%;
+
+    .version-info {
+      font-family: 'Space Grotesk', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: #444444;
+    }
+
+    .copyright {
+      font-family: 'Space Grotesk', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      color: #444444;
+      opacity: 0.5;
+      margin-top: 8px;
+    }
+  }
+}
+
+// ==========================================
+// MAIN CONTENT AREA
+// ==========================================
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #08A045 60.58%, #FFFFFF 100%);
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+// ==========================================
+// BREADCRUMB
+// ==========================================
+
+.breadcrumb-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0 32px;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  padding: 0;
+  margin: 0 0 8px;
+
+  .breadcrumb-item {
+    font-family: 'Space Grotesk', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.6);
+
+    &.active {
+      color: #0B6E33;
+      font-weight: 400;
+    }
+
+    &::before {
+      content: '>';
+      padding: 0 8px;
+      color: rgba(0, 0, 0, 0.4);
+    }
+
+    &:first-child::before {
+      content: none;
+    }
+  }
+}
+
+// ==========================================
+// PAGE HEADING
+// ==========================================
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 32px;
+
+  h1, h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35.9px;
+    line-height: 40px;
+    letter-spacing: -0.9px;
+    color: #FFFFFF;
+    margin: 0;
+  }
+}
+
+// ==========================================
+// FORM CARD
+// ==========================================
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px 32px 48px;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #324D67;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+}
+
+// ==========================================
+// FORM SECTIONS
+// ==========================================
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  margin-bottom: 32px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    color: #444444;
+    padding-bottom: 8px;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+// ==========================================
+// FORM ELEMENTS
+// ==========================================
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.form-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #444444;
+  margin: 0;
+
+  &.required::after {
+    content: ' *';
+    color: #dc3545;
+  }
+}
+
+.form-control {
+  width: 100%;
+  height: 48px;
+  background: #C7FEDD;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #444444;
+  
+  &:focus {
+    outline: none;
+    border-color: #08A045;
+    box-shadow: 0 0 0 0.25rem rgba(8, 160, 69, 0.25);
+  }
+  
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 400;
+  }
+}
+
+textarea.form-control {
+  height: 130px;
+  resize: vertical;
+  overflow-y: auto;
+}
+
+// Select dropdown styling
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23444444' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+// ==========================================
+// FORM ROW (Two columns)
+// ==========================================
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+
+  .form-group {
+    flex: 1;
+  }
+}
+
+// ==========================================
+// FORM FOOTER / ACTIONS
+// ==========================================
+
+.form-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 16px;
+  gap: 16px;
+  width: 100%;
+  border-top: 1px solid #324D67;
+  margin-top: 16px;
+}
+
+// ==========================================
+// BUTTONS
+// ==========================================
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  gap: 8px;
+  border-radius: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  background: #08A045;
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0px 10px 15px -3px rgba(19, 127, 236, 0.2), 0px 4px 6px -4px rgba(19, 127, 236, 0.2);
+  padding: 12px 32px;
+
+  &:hover {
+    background: #06873a;
+    box-shadow: 0px 12px 18px -3px rgba(19, 127, 236, 0.25), 0px 6px 8px -4px rgba(19, 127, 236, 0.25);
+  }
+
+  .btn-icon {
+    width: 20px;
+    height: 24px;
+  }
+}
+
+.btn-secondary,
+.btn-outline {
+  background: transparent;
+  color: #444444;
+  padding: 12px 24px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+// ==========================================
+// LOGIN PAGE STYLES
+// ==========================================
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffff;
+}
+
+.login-card {
+  background-color: #198754;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  max-width: 1200px;
+  width: 100%;
+}
+
+.login-header {
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.login-body {
+  padding: 2rem 1.5rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+.welcome-title {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+  color: rgba(255, 255, 255, 0.841);
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 1.5rem;
+}
+
+// ==========================================
+// TAB SWITCHES
+// ==========================================
+
+.role-tabs {
+  display: flex;
+  border-bottom: 1px solid #198754;
+  margin-bottom: 1.5rem;
+}
+
+.role-tab {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  
+  &.active {
+    color: white;
+    border-bottom-color: white;
+  }
+  
+  &:not(.active) {
+    color: rgba(0, 0, 0, 0.25);
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
+
+// ==========================================
+// CARDS
+// ==========================================
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: white;
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0 0 0.75rem 0.75rem !important;
+    padding: 1rem 1.5rem;
+  }
+}
+
+// ==========================================
+// DASHBOARD SPECIFIC STYLES
+// ==========================================
+
+.welcome-title {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid #08A045;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  height: 120px;
+  position: relative;
+}
+
+.stat-title {
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  color: #444444;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.stat-icon {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  width: 50px;
+  height: 50px;
+}
+
+.table-section {
+  margin-top: 32px;
+  
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: white;
+    border: 1px solid #324D67;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    
+    h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #444444;
+      margin: 0;
+    }
+  }
+}
+
+.table-container {
+  background: white;
+  border: 1px solid #324D67;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  
+  &.with-header {
+    border-radius: 0 0 12px 12px;
+    border-top: none;
+  }
+  
+  &.standalone {
+    border-radius: 12px;
+  }
+}
+
+// ==========================================
+// TABLES
+// ==========================================
+
+.dashboard-table {
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 0;
+  
+  thead {
+    background-color: #f8f9fa;
+    
+    th {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      color: #6c757d;
+      border: none;
+      padding: 1rem;
+      white-space: nowrap;
+    }
+  }
+  
+  tbody {
+    tr {
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: rgba(8, 160, 69, 0.05);
+      }
+    }
+    
+    td {
+      padding: 0.875rem 1rem;
+      vertical-align: middle;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.table-responsive {
+  border-radius: 0.75rem;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+// Table specific elements
+.req-id {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #08A045;
+}
+
+.item-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #444444;
+}
+
+.submitter-name,
+.borrower-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #444444;
+}
+
+.submitter-dept,
+.borrower-dept {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-top: 2px;
+}
+
+.date-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: #444444;
+}
+
+.quantity-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 24px;
+  padding: 0 8px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #444444;
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  background: rgba(8, 160, 69, 0.1);
+  border: 1px solid #08A045;
+  border-radius: 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #08A045;
+  text-transform: capitalize;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  color: #6c757d;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  margin-left: 4px;
+  
+  &:hover {
+    background: rgba(8, 160, 69, 0.1);
+    border-color: #08A045;
+    color: #08A045;
+  }
+  
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+// Table section with actions
+.table-section-full {
+  margin-top: 32px;
+  width: 100%;
+}
+
+.table-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: white;
+  border: 1px solid #324D67;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #444444;
+    margin: 0;
+  }
+}
+
+// ==========================================
+// BADGES & STATUS
+// ==========================================
+
+.badge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+}
+
+.status-available {
+  background-color: #198754;
+  color: white;
+}
+
+.status-borrowed {
+  background-color: #dc3545;
+  color: white;
+}
+
+.status-pending {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.status-approved {
+  background-color: #198754;
+  color: white;
+}
+
+.status-rejected {
+  background-color: #dc3545;
+  color: white;
+}
+
+// ==========================================
+// UTILITIES
+// ==========================================
+
+// Text opacity utilities
+.text-opacity-10 { color: rgba(0, 0, 0, 0.1) !important; }
+.text-opacity-25 { color: rgba(0, 0, 0, 0.25) !important; }
+.text-opacity-50 { color: rgba(0, 0, 0, 0.5) !important; }
+.text-opacity-75 { color: rgba(0, 0, 0, 0.75) !important; }
+
+// Background opacity utilities
+.bg-opacity-10 { background-color: rgba(0, 0, 0, 0.1) !important; }
+.bg-opacity-25 { background-color: rgba(0, 0, 0, 0.25) !important; }
+.bg-opacity-50 { background-color: rgba(0, 0, 0, 0.5) !important; }
+.bg-opacity-75 { background-color: rgba(0, 0, 0, 0.75) !important; }
+
+// Shadow utilities
+.shadow-sm {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+// ==========================================
+// RESPONSIVE ADJUSTMENTS
+// ==========================================
+
+// Kategori page specific styles
+.kategori-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  
+  .kategori-title {
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+  }
+}
+
+.kategori-edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  
+  .kategori-title {
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 1.75rem;
+    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+  }
+}
+
+// ==========================================
+// ADMIN DASHBOARD STYLES
+// ==========================================
+
+.admin-container {
+  display: flex;
+  flex-direction: row-reverse;
+  min-height: 100vh;
+  background: #101922;
+}
+
+.admin-main-content {
+  flex: 1;
+  background: linear-gradient(180deg, #08A045 0%, #08A045 100%);
+  padding: 48px;
+  overflow-y: auto;
+}
+
+.admin-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-welcome-title {
+  color: white;
+  font-size: 1.75rem;
+  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 32px;
+}
+
+.page-header-with-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.table-header-admin {
+  background: white;
+  padding: 16px 24px;
+  border: 1px solid #324D67;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #444444;
+    margin: 0;
+  }
+}
+
+.table-container-admin {
+  background: white;
+  border: 1px solid #324D67;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.status-select {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 4px 12px;
+  background: transparent;
+  cursor: pointer;
+  
+  &:focus {
+    border-color: #08A045;
+    box-shadow: 0 0 0 0.25rem rgba(8, 160, 69, 0.15);
+  }
+  
+  option {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+.activity-section {
+  margin-bottom: 48px;
+}
+
+.activity-title {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 16px;
+}
+
+.activity-divider {
+  height: 1px;
+  background: white;
+  margin-bottom: 24px;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activity-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  
+  .activity-date,
+  .activity-user {
+    color: #6c757d;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .activity-action {
+    color: #dc3545;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+.response-section {
+  margin-top: 48px;
+}
+
+.response-title {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 24px;
+}
+
+.response-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.response-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.response-card-title {
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 16px;
+}
+
+.response-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.response-item {
+  background: #C7FEDD;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #6c757d;
+  border-bottom: 1px solid rgba(108, 117, 139, 0.1);
+  min-height: 45px;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &.active {
+    background: rgba(108, 117, 139, 0.1);
+  }
+}
+
+.admin-sidebar {
+  width: 288px;
+  background: white;
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 48px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.admin-nav-container {
+  width: 100%;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-nav-item {
+  width: 100%;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: rgba(0, 0, 0, 0.25);
+  font-weight: 500;
+  font-size: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  text-decoration: none;
+  border: 1px solid #08A045;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(8, 160, 69, 0.05);
+    color: #08A045;
+  }
+  
+  &.active {
+    background: #08A045;
+    color: white;
+  }
+}
+
+// ==========================================
+// ADMIN FORM CONTAINER
+// ==========================================
+
+.admin-form-container {
+  min-height: 100vh;
+  background: #101922;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+}
+
+.admin-form-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  background: linear-gradient(180deg, #08A045 0%, #08A045 100%);
+  padding: 48px;
+  border-radius: 0;
+}
+
+.admin-form-card {
+  background: white;
+  border-radius: 12px;
+  padding: 48px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.admin-form-title {
+  color: #444444;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 992px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .content-wrapper {
+    padding: 24px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-card {
+    margin: 1rem;
+  }
+  
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .page-header h1,
+  .page-header h2 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .form-card {
+    padding: 24px 16px 32px;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// ==========================================
+// ANIMATIONS
+// ==========================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+// ==========================================
+// LOADING STATES
+// ==========================================
+
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid #08A045;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

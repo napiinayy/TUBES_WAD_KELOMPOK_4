@@ -1,0 +1,308 @@
+// ==========================================
+// FRI LABORATORIUM BOOTSTRAP CONFIGURATION
+// Extracted from your Figma design
+// ==========================================
+
+// ==========================================
+// COLORS (Extracted from your design)
+// ==========================================
+
+// Primary Colors
+$primary: #08A045;        // Green - Main brand color from Pengadaan Barang
+$primary-dark: #0B6E33;   // Darker green variant
+$primary-light: #C7FEDD;  // Light green background for inputs
+$secondary: #6c757d;      // Gray
+$success: #08A045;        // Green - Same as primary
+$danger: #dc3545;         // Red (Bootstrap default)
+$warning: #ffc107;        // Yellow (Bootstrap default)
+$info: #0dcaf0;          // Cyan (Bootstrap default)
+
+// Neutral Colors
+$white: #ffffff;
+$black: #000000;
+$dark: #212529;          // bg-dark background
+$gray-dark: #444444;     // Text color from design
+$gray-medium: #64748B;   // Colors-gray/500
+$gray-light: #f8f9fa;
+
+// Specific Design Colors
+$white-vulcan: #101922;  // Dark background
+$san-juan: #324D67;      // Border color
+$malibu: #92ADC9;        // Icon color
+
+// Text Colors
+$body-color: $gray-dark;
+$text-muted: rgba(0, 0, 0, 0.25);  // text-black text-opacity-25
+
+// Background Colors
+$body-bg: $white-vulcan;
+$card-bg: $white;
+$sidebar-bg: $white;
+$main-bg: linear-gradient(180deg, $primary 60.58%, $white 100%);
+
+// Border Colors
+$border-color: rgba(0, 0, 0, 0.25);
+$border-color-light: rgba(255, 255, 255, 0.1);
+$border-color-white: rgba(255, 255, 255, 0.5);
+
+// ==========================================
+// TYPOGRAPHY
+// ==========================================
+
+// Font Family (Space Grotesk from your design)
+$font-family-sans-serif: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-family-base: $font-family-sans-serif;
+
+// Font Sizes (from your design)
+$font-size-base: 1rem;        // 16px
+$font-size-sm: 0.875rem;      // 14px
+$font-size-xs: 0.75rem;       // 12px
+$font-size-lg: 1.125rem;      // 18px
+$h1-font-size: 2.5rem;        // 40px
+$h2-font-size: 2.24375rem;    // 35.9px - "Pengajuan Pengadaan Barang"
+$h3-font-size: 1.75rem;       // 28px
+$h4-font-size: 1.125rem;      // 18px - Headings in form
+$h5-font-size: 1.25rem;       // 20px
+$h6-font-size: 1rem;          // 16px
+
+// Font Weights
+$font-weight-lighter: 300;
+$font-weight-light: 300;
+$font-weight-normal: 400;     // fw-normal
+$font-weight-medium: 500;     // fw-medium - Labels
+$font-weight-semibold: 600;
+$font-weight-bold: 700;       // fw-bold - Headings
+$font-weight-bolder: 800;
+
+// Line Heights
+$line-height-base: 1.5;       // 24px / 16px
+$line-height-sm: 1.25;        // 20px / 16px
+$line-height-md: 1.4375;      // 23px / 16px
+$line-height-lg: 1.75;        // 28px / 16px
+$line-height-heading: 1.1111; // 40px / 35.9px
+
+// Letter Spacing
+$letter-spacing-tight: -0.9px; // For large headings
+
+// ==========================================
+// SPACING
+// ==========================================
+
+$spacer: 1rem;  // 16px base
+
+$spacers: (
+  0: 0,
+  1: ($spacer * 0.5),    // 8px  - gap-8
+  2: ($spacer * 0.75),   // 12px
+  3: ($spacer),          // 16px - padding-16
+  4: ($spacer * 1.5),    // 24px - gap-24
+  5: ($spacer * 2),      // 32px - padding-32, gap-32
+  6: ($spacer * 3),      // 48px - padding-48
+  7: ($spacer * 6.25),   // 100px - padding-100
+);
+
+// ==========================================
+// BORDER & RADIUS
+// ==========================================
+
+// Border Radius
+$border-radius: 0.5rem;       // 8px - Standard rounded
+$border-radius-sm: 0.125rem;  // 2px - Small elements
+$border-radius-lg: 0.75rem;   // 12px - Cards
+$border-radius-xl: 1rem;      // 16px
+
+// Border Width
+$border-width: 1px;
+
+// ==========================================
+// LAYOUT DIMENSIONS
+// ==========================================
+
+// Sidebar
+$sidebar-width: 288px;        // Fixed sidebar width
+$sidebar-padding: 16px;
+
+// Container
+$container-max-width: 1000px; // max-width for main content
+$content-padding: 48px;       // Main content padding
+
+// ==========================================
+// BUTTONS
+// ==========================================
+
+$btn-padding-y: 0.75rem;       // 12px
+$btn-padding-x: 1.5rem;        // 24px
+$btn-padding-x-lg: 2rem;       // 32px
+$btn-font-family: $font-family-base;
+$btn-font-size: $font-size-base;
+$btn-line-height: $line-height-base;
+$btn-white-space: nowrap;
+$btn-font-weight: $font-weight-bold;
+$btn-border-radius: $border-radius;
+$btn-border-width: 0;
+$btn-box-shadow: 0px 10px 15px -3px rgba(19, 127, 236, 0.2), 0px 4px 6px -4px rgba(19, 127, 236, 0.2);
+$btn-focus-width: 0;
+$btn-active-box-shadow: none;
+
+// Button Variants
+$btn-padding-y-sm: 0.625rem;  // 10px
+$btn-padding-x-sm: 0.75rem;   // 12px
+$btn-font-size-sm: $font-size-sm;
+
+// ==========================================
+// FORMS & INPUTS
+// ==========================================
+
+$input-padding-y: 0.75rem;           // 12px
+$input-padding-x: 1rem;              // 16px
+$input-font-family: $font-family-base;
+$input-font-size: $font-size-base;
+$input-font-weight: $font-weight-normal;
+$input-line-height: $line-height-base;
+
+$input-bg: $primary-light;           // #C7FEDD - Light green background
+$input-disabled-bg: #e9ecef;
+$input-disabled-border-color: $border-color;
+
+$input-color: $body-color;
+$input-border-color: $border-color-white;
+$input-border-width: $border-width;
+$input-box-shadow: none;
+
+$input-border-radius: $border-radius;
+$input-border-radius-sm: $border-radius-sm;
+$input-border-radius-lg: $border-radius-lg;
+
+$input-focus-bg: $input-bg;
+$input-focus-border-color: $primary;
+$input-focus-color: $input-color;
+$input-focus-width: 0.25rem;
+$input-focus-box-shadow: 0 0 0 $input-focus-width rgba($primary, 0.25);
+
+$input-placeholder-color: rgba($black, 0.4);
+$input-plaintext-color: $body-color;
+
+// Input heights
+$input-height: 48px;          // Standard input height
+$textarea-height: 130px;      // Textarea height
+
+// Form labels
+$form-label-margin-bottom: 0.5rem;
+$form-label-font-size: $font-size-sm;
+$form-label-font-weight: $font-weight-medium;
+$form-label-color: $gray-dark;
+
+// ==========================================
+// NAVIGATION
+// ==========================================
+
+// Nav items
+$nav-item-height: 40px;
+$nav-item-padding-y: 0.625rem;  // 10px
+$nav-item-padding-x: 0.75rem;   // 12px
+$nav-item-gap: 0.75rem;         // 12px
+$nav-item-border-radius: $border-radius;
+$nav-item-font-size: $font-size-sm;
+$nav-item-font-weight: $font-weight-medium;
+
+// Active nav item
+$nav-item-active-bg: $primary;
+$nav-item-active-color: $white;
+$nav-item-active-border: 1px solid $primary;
+
+// Inactive nav item
+$nav-item-border: 1px solid $primary;
+$nav-item-color: $gray-dark;
+
+// ==========================================
+// CARDS
+// ==========================================
+
+$card-spacer-y: 2rem;         // 32px
+$card-spacer-x: 2rem;         // 32px
+$card-spacer-bottom: 3rem;    // 48px
+$card-title-spacer-y: 0.5rem; // 8px
+$card-border-width: 1px;
+$card-border-radius: $border-radius-lg;
+$card-border-color: $san-juan;
+$card-inner-border-radius: $border-radius-lg;
+$card-bg: $white;
+$card-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+
+// ==========================================
+// TABLES
+// ==========================================
+
+$table-cell-padding-y: 0.75rem;
+$table-cell-padding-x: 1rem;
+$table-cell-padding-y-sm: 0.5rem;
+$table-cell-padding-x-sm: 0.75rem;
+
+$table-bg: transparent;
+$table-accent-bg: transparent;
+$table-hover-bg: rgba($black, 0.025);
+$table-active-bg: $table-hover-bg;
+$table-border-width: $border-width;
+$table-border-color: $border-color;
+$table-striped-order: odd;
+$table-group-separator-color: currentColor;
+
+$table-caption-color: $text-muted;
+$table-head-bg: $gray-light;
+$table-head-color: $body-color;
+
+// ==========================================
+// SHADOWS
+// ==========================================
+
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15);
+$box-shadow-sm: 0px 1px 2px rgba($black, 0.05);
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175);
+$box-shadow-inset: inset 0 1px 2px rgba($black, 0.075);
+$box-shadow-btn: 0px 10px 15px -3px rgba(19, 127, 236, 0.2), 0px 4px 6px -4px rgba(19, 127, 236, 0.2);
+
+// ==========================================
+// GRID & LAYOUT
+// ==========================================
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// Grid columns
+$grid-columns: 12;
+$grid-gutter-width: 1.5rem;
+$grid-row-columns: 6;
+
+// ==========================================
+// TRANSITIONS
+// ==========================================
+
+$transition-base: all 0.2s ease-in-out;
+$transition-fade: opacity 0.15s linear;
+$transition-collapse: height 0.35s ease;
+
+// ==========================================
+// Z-INDEX
+// ==========================================
+
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-modal-backdrop: 1040;
+$zindex-modal: 1050;
+$zindex-popover: 1060;
+$zindex-tooltip: 1070;
