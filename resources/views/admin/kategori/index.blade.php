@@ -19,16 +19,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/home">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link" href="/admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-admin/kategori">Kategori Barang</a>
+                        <a class="nav-link active" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/profil">Profil</a>
+                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -73,7 +76,7 @@
                             </div>
                         </div>
                         
-                        <a href="/test-admin/kategori/create" class="btn btn-primary">
+                        <a href="/admin/kategori/create" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
                             Tambah Barang
                         </a>
@@ -97,10 +100,10 @@
                                             <td><div class="item-name">{{ $item->nama_barang }}</div></td>
                                             <td><span class="date-text">{{ $item->jenis_barang }}</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/{{ $item->id }}" class="action-btn" title="View">
+                                                <a href="/admin/kategori/{{ $item->id }}" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/{{ $item->id }}/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/{{ $item->id }}/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $item->id }})">
@@ -115,10 +118,10 @@
                                             <td><div class="item-name">Microscope Olympus CX23</div></td>
                                             <td><span class="date-text">Alat Laboratorium</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/1" class="action-btn" title="View">
+                                                <a href="/admin/kategori/1" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/1/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/1/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(1)">
@@ -131,10 +134,10 @@
                                             <td><div class="item-name">Digital Centrifuge</div></td>
                                             <td><span class="date-text">Alat Laboratorium</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/2" class="action-btn" title="View">
+                                                <a href="/admin/kategori/2" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/2/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/2/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(2)">
@@ -147,10 +150,10 @@
                                             <td><div class="item-name">Beaker Set (500ml)</div></td>
                                             <td><span class="date-text">Alat Gelas</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/3" class="action-btn" title="View">
+                                                <a href="/admin/kategori/3" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/3/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/3/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(3)">
@@ -163,10 +166,10 @@
                                             <td><div class="item-name">pH Meter Digital</div></td>
                                             <td><span class="date-text">Alat Ukur</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/4" class="action-btn" title="View">
+                                                <a href="/admin/kategori/4" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/4/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/4/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(4)">
@@ -179,10 +182,10 @@
                                             <td><div class="item-name">Bunsen Burner</div></td>
                                             <td><span class="date-text">Alat Pemanas</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/5" class="action-btn" title="View">
+                                                <a href="/admin/kategori/5" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/5/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/5/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(5)">
@@ -195,10 +198,10 @@
                                             <td><div class="item-name">Safety Goggles</div></td>
                                             <td><span class="date-text">APD</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/6" class="action-btn" title="View">
+                                                <a href="/admin/kategori/6" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/6/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/6/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(6)">
@@ -211,10 +214,10 @@
                                             <td><div class="item-name">Lab Coat</div></td>
                                             <td><span class="date-text">APD</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/7" class="action-btn" title="View">
+                                                <a href="/admin/kategori/7" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/7/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/7/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(7)">
@@ -227,10 +230,10 @@
                                             <td><div class="item-name">Analytical Balance</div></td>
                                             <td><span class="date-text">Alat Ukur</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/8" class="action-btn" title="View">
+                                                <a href="/admin/kategori/8" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/8/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/8/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(8)">
@@ -243,10 +246,10 @@
                                             <td><div class="item-name">Pipette Set</div></td>
                                             <td><span class="date-text">Alat Gelas</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/9" class="action-btn" title="View">
+                                                <a href="/admin/kategori/9" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/9/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/9/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(9)">
@@ -259,10 +262,10 @@
                                             <td><div class="item-name">Thermometer Digital</div></td>
                                             <td><span class="date-text">Alat Ukur</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/kategori/10" class="action-btn" title="View">
+                                                <a href="/admin/kategori/10" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/kategori/10/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/kategori/10/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(10)">
@@ -305,7 +308,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-admin/kategori/' + id;
+                form.action = '/admin/kategori/' + id;
                 form.submit();
             }
         }

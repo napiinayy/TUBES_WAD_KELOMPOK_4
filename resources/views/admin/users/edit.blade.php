@@ -18,16 +18,16 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/dashboard">Dashboard</a>
+                        <a class="nav-link" href="admin/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link active" href="admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/kategori">Kategori Barang</a>
+                        <a class="nav-link" href="admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/profil">Profil</a>
+                        <a class="nav-link" href="admin/profil">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -47,10 +47,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-admin/dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
+                                <a href="admin/dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/test-admin/users" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
+                                <a href="admin/users" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
                             </li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
@@ -64,7 +64,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/test-admin/users/{{ $user->id }}">
+                    <form method="POST" action="admin/users/{{ $user->id }}">
                         @csrf
                         @method('PUT')
                         
@@ -223,7 +223,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/test-admin/users" class="btn btn-secondary">Batal</a>
+                            <a href="admin/users" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-save me-2"></i>
                                 Simpan Perubahan

@@ -19,16 +19,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/home">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/kategori">Kategori Barang</a>
+                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/profil">Profil</a>
+                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -60,7 +63,7 @@
                 <div class="table-section-full">
                     <div class="table-header-actions">
                         <h3>Daftar Pengguna</h3>
-                        <a href="/test-admin/users/create" class="btn btn-primary">
+                        <a href="/admin/users/create" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
                             Tambah Pengguna
                         </a>
@@ -88,10 +91,10 @@
                                             <td><span class="date-text">{{ $user->lab_name ?? '-' }}</span></td>
                                             <td><span class="date-text">{{ $user->jurusan }}</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/users/{{ $user->id }}" class="action-btn" title="View">
+                                                <a href="/admin/users/{{ $user->id }}" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/users/{{ $user->id }}/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/users/{{ $user->id }}/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $user->id }})">
@@ -108,10 +111,10 @@
                                             <td><span class="date-text">Lab Kimia</span></td>
                                             <td><span class="date-text">Teknik Kimia</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/users/1" class="action-btn" title="View">
+                                                <a href="/admin/users/1" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/users/1/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/users/1/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(1)">
@@ -126,10 +129,10 @@
                                             <td><span class="date-text">Lab Fisika</span></td>
                                             <td><span class="date-text">Teknik Fisika</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/users/2" class="action-btn" title="View">
+                                                <a href="/admin/users/2" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/users/2/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/users/2/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(2)">
@@ -144,10 +147,10 @@
                                             <td><span class="date-text">Lab Biologi</span></td>
                                             <td><span class="date-text">Biologi</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/users/3" class="action-btn" title="View">
+                                                <a href="/admin/users/3" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/users/3/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/users/3/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(3)">
@@ -162,10 +165,10 @@
                                             <td><span class="date-text">Lab Komputer</span></td>
                                             <td><span class="date-text">Informatika</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/users/4" class="action-btn" title="View">
+                                                <a href="/admin/users/4" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/users/4/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/users/4/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(4)">
@@ -180,10 +183,10 @@
                                             <td><span class="date-text">Lab Kimia</span></td>
                                             <td><span class="date-text">Kimia Murni</span></td>
                                             <td class="text-end">
-                                                <a href="/test-admin/users/5" class="action-btn" title="View">
+                                                <a href="/admin/users/5" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/test-admin/users/5/edit" class="action-btn" title="Edit">
+                                                <a href="/admin/users/5/edit" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete(5)">
@@ -218,7 +221,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus pengguna ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-admin/users/' + id;
+                form.action = '/admin/users/' + id;
                 form.submit();
             }
         }

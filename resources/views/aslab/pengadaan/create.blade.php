@@ -18,19 +18,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="/home">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link active" href="/aslab/pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="/aslab/peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Keluhan</a>
+                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-kategori">Kategori Barang</a>
+                        <a class="nav-link" href="/admin/users">Profil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/test-profil">Profil</a>
@@ -53,10 +53,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/test-pengadaan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
+                                <a href="/aslab/pengadaan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
                             </li>
                             <li class="breadcrumb-item active">Tambah Pengadaan</li>
                         </ol>
@@ -70,7 +70,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/test-pengadaan">
+                    <form method="POST" action="/aslab/pengadaan">
                         @csrf
                         
                         <!-- Detail Item Section -->
@@ -196,7 +196,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/test-pengadaan" class="btn btn-secondary">Kembali</a>
+                            <a href="/aslab/pengadaan" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-send me-2"></i>
                                 Kirim

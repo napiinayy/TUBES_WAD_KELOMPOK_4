@@ -18,22 +18,22 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="dashboard">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-keluhan">Keluhan</a>
+                        <a class="nav-link active" href="keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-kategori">Kategori Barang</a>
+                        <a class="nav-link" href="kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-profil">Profil</a>
+                        <a class="nav-link" href="profil">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -53,10 +53,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/test-keluhan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Keluhan</a>
+                                <a href="keluhan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Keluhan</a>
                             </li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -111,7 +111,7 @@
                     
                     <!-- Detail Footer -->
                     <div class="detail-footer">
-                        <a href="/test-keluhan" class="btn btn-secondary">
+                        <a href="keluhan" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i>
                             Kembali
                         </a>
@@ -138,7 +138,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus keluhan ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-keluhan/' + id;
+                form.action = 'keluhan/' + id;
                 form.submit();
             }
         }

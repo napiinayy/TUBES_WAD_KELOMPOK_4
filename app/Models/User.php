@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Lab;
 
 class User extends Authenticatable
 {
@@ -19,7 +20,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nama_lengkap',
+        'kode_aslab',
         'email',
+        'username',
+        'id_lab',
+        'jurusan',
+        'role',
         'password',
     ];
 
@@ -34,15 +41,28 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string,string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Relation to Lab (laboratorium) - for single lab if needed
+     */
+    public function laboratorium()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Lab::class, 'id_lab');
+    }
+
+    /**
+     * Many-to-many relation to Labs via user_lab pivot
+     */
+    public function labs()
+    {
+        return $this->belongsToMany(Lab::class, 'user_lab');
     }
 }

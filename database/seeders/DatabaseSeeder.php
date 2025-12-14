@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Lab;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +16,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Seed a lab first
+        Lab::create([
+            'nama_lab' => 'SISJAR Lab',
+            'kode_lab' => 'SJ001',
+        ]);
+
         // User::factory(10)->create();
 
         User::factory()->create([

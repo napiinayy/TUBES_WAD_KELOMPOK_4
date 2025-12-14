@@ -18,22 +18,22 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="/home">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="/aslab/pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="/aslab/peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-keluhan">Keluhan</a>
+                        <a class="nav-link active" href="/admin/keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-kategori">Kategori Barang</a>
+                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-profil">Profil</a>
+                        <a class="nav-link" href="/admin/users">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -53,7 +53,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Pengajuan Keluhan</li>
                         </ol>
@@ -67,7 +67,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/test-keluhan">
+                    <form method="POST" action="/admin/keluhan">
                         @csrf
                         
                         <!-- Detail Keluhan Section -->
@@ -129,7 +129,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/test-keluhan" class="btn btn-secondary">Kembali</a>
+                            <a href="/admin/keluhan" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-send me-2"></i>
                                 Kirim

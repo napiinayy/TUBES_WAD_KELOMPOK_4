@@ -18,22 +18,22 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="dashboard">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-keluhan">Keluhan</a>
+                        <a class="nav-link active" href="keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-kategori">Kategori Barang</a>
+                        <a class="nav-link" href="kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-profil">Profil</a>
+                        <a class="nav-link" href="profil">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -53,7 +53,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Keluhan</li>
                         </ol>
@@ -77,7 +77,7 @@
                 <div class="table-section-full">
                     <div class="table-header-actions">
                         <h3>Daftar Keluhan</h3>
-                        <a href="/test-keluhan/create" class="btn btn-primary">
+                        <a href="keluhan/create" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
                             Tambah Keluhan
                         </a>
@@ -126,7 +126,7 @@
                                             @endif
                                         </td>
                                         <td class="text-end">
-                                            <a href="/test-keluhan/{{ $keluhan->id }}" class="action-btn" title="View">
+                                            <a href="keluhan/{{ $keluhan->id }}" class="action-btn" title="View">
                                                 <i class="bi bi-eye"></i>
                                             </a>
                                             <button class="action-btn" title="Delete" onclick="confirmDelete({{ $keluhan->id }})">
@@ -139,7 +139,7 @@
                                         <td colspan="8" class="text-center py-4">
                                             <i class="bi bi-inbox" style="font-size: 3rem; color: #ccc;"></i>
                                             <p class="mt-2 text-muted">Belum ada keluhan</p>
-                                            <a href="/test-keluhan/create" class="btn btn-primary btn-sm mt-2">
+                                            <a href="keluhan/create" class="btn btn-primary btn-sm mt-2">
                                                 <i class="bi bi-plus-circle me-1"></i>
                                                 Tambah Keluhan Pertama
                                             </a>
@@ -173,7 +173,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus keluhan ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-keluhan/' + id;
+                form.action = 'keluhan/' + id;
                 form.submit();
             }
         }

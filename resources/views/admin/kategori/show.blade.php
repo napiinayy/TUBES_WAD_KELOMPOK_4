@@ -18,16 +18,16 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link" href="admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-admin/kategori">Kategori Barang</a>
+                        <a class="nav-link active" href="admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/profil">Profil</a>
+                        <a class="nav-link" href="admin/profil">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -47,10 +47,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-admin/dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
+                                <a href="admin/dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/test-admin/kategori" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kategori Barang</a>
+                                <a href="admin/kategori" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kategori Barang</a>
                             </li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -119,12 +119,12 @@
                     
                     <!-- Detail Footer -->
                     <div class="detail-footer">
-                        <a href="/test-admin/kategori" class="btn btn-secondary">
+                        <a href="admin/kategori" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i>
                             Kembali
                         </a>
                         <div class="detail-actions">
-                            <a href="/test-admin/kategori/{{ $item->id }}/edit" class="btn btn-primary">
+                            <a href="admin/kategori/{{ $item->id }}/edit" class="btn btn-primary">
                                 <i class="bi bi-pencil me-2"></i>
                                 Edit
                             </a>
@@ -150,7 +150,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus barang ini?\n\nPeringatan: Semua data terkait akan ikut terhapus.')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-admin/kategori/' + id;
+                form.action = 'admin/kategori/' + id;
                 form.submit();
             }
         }

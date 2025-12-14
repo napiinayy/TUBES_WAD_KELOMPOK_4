@@ -57,25 +57,25 @@
                                 {{-- Hidden Role Input --}}
                                 <input type="hidden" name="role" id="roleInput" value="aslab">
                                 
-                                {{-- Username/Code Field --}}
+                                {{-- Email Field --}}
                                 <div class="mb-3">
-                                    <label for="username" class="form-label" id="usernameLabel">
-                                        Kode Asisten Laboratorium
+                                    <label for="email" class="form-label" id="emailLabel">
+                                        Email Asisten Laboratorium
                                     </label>
                                     <div class="input-group">
-                                        <input type="text" 
-                                               class="form-control @error('username') is-invalid @enderror" 
-                                               id="username" 
-                                               name="username" 
-                                               value="{{ old('username') }}" 
-                                               placeholder="Masukkan kode asisten"
+                                        <input type="email" 
+                                               class="form-control @error('email') is-invalid @enderror" 
+                                               id="email" 
+                                               name="email" 
+                                               value="{{ old('email') }}" 
+                                               placeholder="Masukkan email asisten"
                                                required 
                                                autofocus>
                                         <span class="input-group-text bg-white border-white">
-                                            <i class="bi bi-person"></i>
+                                            <i class="bi bi-envelope"></i>
                                         </span>
                                     </div>
-                                    @error('username')
+                                    @error('email')
                                         <div class="invalid-feedback d-block text-white">
                                             {{ $message }}
                                         </div>
@@ -156,15 +156,15 @@
                 document.getElementById('roleInput').value = role;
                 
                 // Update label text
-                const label = document.getElementById('usernameLabel');
-                const input = document.getElementById('username');
+                const label = document.getElementById('emailLabel');
+                const input = document.getElementById('email');
                 
                 if (role === 'admin') {
-                    label.textContent = 'Username Admin';
-                    input.placeholder = 'Masukkan username admin';
+                    label.textContent = 'Email Admin';
+                    input.placeholder = 'Masukkan email admin';
                 } else {
-                    label.textContent = 'Kode Asisten Laboratorium';
-                    input.placeholder = 'Masukkan kode asisten';
+                    label.textContent = 'Email Asisten Laboratorium';
+                    input.placeholder = 'Masukkan email asisten';
                 }
             });
         });

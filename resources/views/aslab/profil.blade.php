@@ -18,19 +18,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="/home">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="/aslab/pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="/aslab/peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Keluhan</a>
+                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-kategori">Kategori Barang</a>
+                        <a class="nav-link active" href="/admin/users">Profil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="/test-profil">Profil</a>
@@ -63,7 +63,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/test-profil">
+                    <form method="POST" action="/admin/users/{{ auth()->id() }}/{{ auth()->id() }}">
                         @csrf
                         @method('PUT')
                         
@@ -129,7 +129,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/test-dashboard" class="btn btn-secondary">Kembali</a>
+                            <a href="/home" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-send me-2"></i>
                                 Kirim

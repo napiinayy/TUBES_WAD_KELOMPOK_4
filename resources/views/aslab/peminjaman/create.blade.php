@@ -22,17 +22,17 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">
+                        <a class="nav-link" href="/home">
                             Beranda
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-pengadaan">
+                        <a class="nav-link" href="/aslab/pengadaan">
                             Pengadaan Barang
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-peminjaman">
+                        <a class="nav-link active" href="/aslab/peminjaman">
                             Peminjaman Barang
                         </a>
                     </li>
@@ -69,7 +69,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Peminjaman Barang</li>
                         </ol>
@@ -220,7 +220,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/test-dashboard" class="btn btn-secondary">
+                            <a href="/home" class="btn btn-secondary">
                                 Kembali
                             </a>
                             <button type="submit" class="btn btn-primary">

@@ -18,16 +18,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/home">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/kategori">Kategori Barang</a>
+                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-admin/profil">Profil</a>
+                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -47,10 +50,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-admin/dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
+                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/test-admin/users" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
+                                <a href="/admin/users" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
                             </li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -145,12 +148,12 @@
                     
                     <!-- Detail Footer -->
                     <div class="detail-footer">
-                        <a href="/test-admin/users" class="btn btn-secondary">
+                        <a href="/admin/users" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i>
                             Kembali
                         </a>
                         <div class="detail-actions">
-                            <a href="/test-admin/users/{{ $user->id }}/edit" class="btn btn-primary">
+                            <a href="/admin/users/{{ $user->id }}/edit" class="btn btn-primary">
                                 <i class="bi bi-pencil me-2"></i>
                                 Edit
                             </a>
@@ -176,7 +179,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus pengguna ini?\n\nPeringatan: Semua data terkait akan ikut terhapus.')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-admin/users/' + id;
+                form.action = '/admin/users/' + id;
                 form.submit();
             }
         }

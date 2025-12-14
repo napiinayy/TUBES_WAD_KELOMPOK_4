@@ -21,7 +21,7 @@
                         <a class="nav-link" href="/test-dashboard">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link active" href="/aslab/pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
@@ -56,7 +56,7 @@
                                 <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/test-pengadaan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
+                                <a href="/aslab/pengadaan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
                             </li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>

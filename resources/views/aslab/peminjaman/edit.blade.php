@@ -18,19 +18,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="dashboard">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link active" href="peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Keluhan</a>
+                        <a class="nav-link" href="admin/keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kategori Barang</a>
+                        <a class="nav-link" href="admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profil</a>

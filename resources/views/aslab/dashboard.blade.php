@@ -19,22 +19,22 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link active" href="/home">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="/aslab/pengadaan">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="/aslab/peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-keluhan">Keluhan</a>
+                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-kategori">Kategori Barang</a>
+                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-profil">Profil</a>
+                        <a class="nav-link" href="/admin/users">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -55,7 +55,7 @@
                 <!-- Stats Cards -->
                 <div class="row g-4 mb-4">
                     <div class="col-lg-4">
-                        <a href="/test-pengadaan" class="text-decoration-none">
+                        <a href="/aslab/pengadaan" class="text-decoration-none">
                             <div class="stat-card">
                                 <div class="stat-title">Pengadaan Barang</div>
                                 <div class="stat-value">{{ $pengadaanCount ?? 0 }}</div>
@@ -64,7 +64,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4">
-                        <a href="/test-peminjaman" class="text-decoration-none">
+                        <a href="/aslab/peminjaman" class="text-decoration-none">
                             <div class="stat-card">
                                 <div class="stat-title">Peminjaman Barang</div>
                                 <div class="stat-value">{{ $peminjamanCount ?? 12 }}</div>
@@ -85,7 +85,7 @@
                 <div class="table-section">
                     <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <h3>Pengajuan Barang</h3>
-                        <a href="/test-pengadaan" class="btn btn-sm btn-primary" style="font-size: 0.875rem; padding: 8px 16px;">
+                        <a href="/aslab/pengadaan" class="btn btn-sm btn-primary" style="font-size: 0.875rem; padding: 8px 16px;">
                             Lihat Semua
                             <i class="bi bi-arrow-right ms-1"></i>
                         </a>
@@ -118,8 +118,8 @@
                                         <td><span class="quantity-badge">1</span></td>
                                         <td><span class="badge badge-approved">Approved</span></td>
                                         <td class="text-end">
-                                            <a href="/test-pengadaan/2048" class="action-btn"><i class="bi bi-eye"></i></a>
-                                            <a href="/test-pengadaan/2048/edit" class="action-btn"><i class="bi bi-pencil"></i></a>
+                                            <a href="/aslab/pengadaan/2048" class="action-btn"><i class="bi bi-eye"></i></a>
+                                            <a href="/aslab/pengadaan/2048/edit" class="action-btn"><i class="bi bi-pencil"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -134,8 +134,8 @@
                                         <td><span class="quantity-badge">2</span></td>
                                         <td><span class="badge badge-rejected">Rejected</span></td>
                                         <td class="text-end">
-                                            <a href="/test-pengadaan/2047" class="action-btn"><i class="bi bi-eye"></i></a>
-                                            <a href="/test-pengadaan/2047/edit" class="action-btn"><i class="bi bi-pencil"></i></a>
+                                            <a href="/aslab/pengadaan/2047" class="action-btn"><i class="bi bi-eye"></i></a>
+                                            <a href="/aslab/pengadaan/2047/edit" class="action-btn"><i class="bi bi-pencil"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -150,8 +150,8 @@
                                         <td><span class="quantity-badge">1</span></td>
                                         <td><span class="badge badge-pending">Pending</span></td>
                                         <td class="text-end">
-                                            <a href="/test-pengadaan/2046" class="action-btn"><i class="bi bi-eye"></i></a>
-                                            <a href="/test-pengadaan/2046/edit" class="action-btn"><i class="bi bi-pencil"></i></a>
+                                            <a href="/aslab/pengadaan/2046" class="action-btn"><i class="bi bi-eye"></i></a>
+                                            <a href="/aslab/pengadaan/2046/edit" class="action-btn"><i class="bi bi-pencil"></i></a>
                                             <button class="action-btn"><i class="bi bi-trash"></i></button>
                                         </td>
                                     </tr>
@@ -165,7 +165,7 @@
                 <div class="table-section">
                     <div class="table-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <h3>Peminjaman Barang</h3>
-                        <a href="/test-peminjaman" class="btn btn-sm btn-primary" style="font-size: 0.875rem; padding: 8px 16px;">
+                        <a href="/aslab/peminjaman" class="btn btn-sm btn-primary" style="font-size: 0.875rem; padding: 8px 16px;">
                             Lihat Semua
                             <i class="bi bi-arrow-right ms-1"></i>
                         </a>
@@ -202,8 +202,8 @@
                                         <td><span class="quantity-badge">1</span></td>
                                         <td><span class="badge badge-dipinjam">Dipinjam</span></td>
                                         <td class="text-end">
-                                            <a href="/test-peminjaman/1025" class="action-btn"><i class="bi bi-eye"></i></a>
-                                            <a href="/test-peminjaman/1025/edit" class="action-btn"><i class="bi bi-check-circle"></i></a>
+                                            <a href="/aslab/peminjaman/1025" class="action-btn"><i class="bi bi-eye"></i></a>
+                                            <a href="/aslab/peminjaman/1025/edit" class="action-btn"><i class="bi bi-check-circle"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -220,8 +220,8 @@
                                         <td><span class="quantity-badge">2</span></td>
                                         <td><span class="badge badge-dipinjam">Dipinjam</span></td>
                                         <td class="text-end">
-                                            <a href="/test-peminjaman/1024" class="action-btn"><i class="bi bi-eye"></i></a>
-                                            <a href="/test-peminjaman/1024/edit" class="action-btn"><i class="bi bi-check-circle"></i></a>
+                                            <a href="/aslab/peminjaman/1024" class="action-btn"><i class="bi bi-eye"></i></a>
+                                            <a href="/aslab/peminjaman/1024/edit" class="action-btn"><i class="bi bi-check-circle"></i></a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -238,8 +238,8 @@
                                         <td><span class="quantity-badge">1</span></td>
                                         <td><span class="badge badge-terlambat">Terlambat</span></td>
                                         <td class="text-end">
-                                            <a href="/test-peminjaman/1023" class="action-btn"><i class="bi bi-eye"></i></a>
-                                            <a href="/test-peminjaman/1023/edit" class="action-btn"><i class="bi bi-exclamation-circle"></i></a>
+                                            <a href="/aslab/peminjaman/1023" class="action-btn"><i class="bi bi-eye"></i></a>
+                                            <a href="/aslab/peminjaman/1023/edit" class="action-btn"><i class="bi bi-exclamation-circle"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
