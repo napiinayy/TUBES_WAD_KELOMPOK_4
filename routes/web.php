@@ -2,6 +2,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AslabController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PeminjamanController;
 
 Route::prefix('peminjaman')->group(function () {
@@ -139,5 +141,22 @@ Route::put('/test-pengadaan/{id}', function ($id) {
 Route::delete('/test-pengadaan/{id}', function ($id) {
     return redirect('/test-pengadaan')->with('success', 'Data berhasil dihapus (Mode Testing)');
 });
+});
+Route::prefix('admin')->middleware('auth')->group(function () {
+    // PROFIL ADMIN
+    Route::get('/profil', [AdminController::class, 'editProfil']);
+    Route::put('/profil', [AdminController::class, 'updateProfil']);
+
+    // KELOLA ASLAB
+    Route::get('/aslab', [AdminController::class, 'indexAslab']);
+    Route::get('/aslab/{id}/edit', [AdminController::class, 'editAslab']);
+    Route::put('/aslab/{id}', [AdminController::class, 'updateAslab']);
+
+});
+
+// Profil Aslab
+Route::prefix('aslab')->group(function () {
+    Route::get('/profil', [AslabController::class, 'editProfil']);
+    Route::put('/profil', [AslabController::class, 'updateProfil']);
 });
 //ini aku ubah juga//
