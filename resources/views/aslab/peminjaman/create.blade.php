@@ -37,12 +37,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">
                             Keluhan
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">
                             Kategori Barang
                         </a>
                     </li>
@@ -83,7 +83,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{ route('peminjaman.store') }}">
                         @csrf
                         
                         <!-- Detail Item Section -->

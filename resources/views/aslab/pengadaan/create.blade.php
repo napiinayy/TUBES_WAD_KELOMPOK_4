@@ -70,7 +70,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/aslab/pengadaan">
+                    <form method="POST" action="{{ route('aslab.pengadaan.store') }}">
                         @csrf
                         
                         <!-- Detail Item Section -->

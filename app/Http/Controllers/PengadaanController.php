@@ -52,7 +52,7 @@ class PengadaanController extends Controller
 
         Pengadaan::create($validated);
 
-        return redirect()->route('pengadaan.index')
+        return redirect()->route('aslab.pengadaan.index')
             ->with('success', 'Pengajuan pengadaan barang berhasil dikirim.');
     }
 
@@ -93,7 +93,7 @@ class PengadaanController extends Controller
 
         $pengadaan->update($validated);
 
-        return redirect()->route('pengadaan.index')
+        return redirect()->route('aslab.pengadaan.index')
             ->with('success', 'Data pengadaan berhasil diperbarui.');
     }
 
@@ -104,7 +104,7 @@ class PengadaanController extends Controller
     {
         $pengadaan->delete();
 
-        return redirect()->route('pengadaan.index')
+        return redirect()->route('aslab.pengadaan.index')
             ->with('success', 'Data pengadaan berhasil dihapus.');
     }
 }

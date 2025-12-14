@@ -18,13 +18,16 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/home">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="/admin/profil">Profil</a>

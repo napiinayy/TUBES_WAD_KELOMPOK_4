@@ -30,7 +30,7 @@
                         <a class="nav-link" href="/admin/keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/users">Profil</a>
+                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -67,7 +67,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/admin/users">
+                    <form method="POST" action="{{ route('admin.users.store') }}">
                         @csrf
                         
                         <div class="form-section">

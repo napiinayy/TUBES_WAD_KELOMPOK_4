@@ -8,6 +8,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeluhanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PengadaanController;
 
 Auth::routes();
 
@@ -17,9 +18,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::resource('admin/users', UserController::class);
-    Route::resource('admin/kategori', KategoriController::class);
-    Route::resource('admin/keluhan', KeluhanController::class);
+    Route::resource('admin/users', UserController::class)->names('admin.users');
+    Route::resource('admin/kategori', KategoriController::class)->names('admin.kategori');
+    Route::resource('admin/keluhan', KeluhanController::class)->names('admin.keluhan');
     Route::resource('aslab/pengadaan', PengadaanController::class);
 
     Route::prefix('aslab/peminjaman')->group(function () {

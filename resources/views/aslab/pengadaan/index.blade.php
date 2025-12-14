@@ -18,19 +18,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link active" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profil</a>
@@ -52,7 +52,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Pengadaan Barang</li>
                         </ol>
@@ -76,7 +76,7 @@
                 <div class="table-section-full">
                     <div class="table-header-actions">
                         <h3>Pengajuan Barang</h3>
-                        <a href="/test-pengadaan/create" class="btn btn-primary">
+                        <a href="{{ route('aslab.pengadaan.create') }}" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
                             Tambah Pengadaan
                         </a>
@@ -110,10 +110,10 @@
                                         <td><span class="quantity-badge">{{ $pengadaan->jumlah }}</span></td>
                                         <td><span class="badge badge-{{ strtolower($pengadaan->status ?? 'pending') }}">{{ ucfirst($pengadaan->status ?? 'Pending') }}</span></td>
                                         <td class="text-end">
-                                            <a href="/test-pengadaan/{{ $pengadaan->id }}" class="action-btn" title="View">
+                                            <a href="{{ route('aslab.pengadaan.show', $pengadaan->id) }}" class="action-btn" title="View">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="/test-pengadaan/{{ $pengadaan->id }}/edit" class="action-btn" title="Edit">
+                                            <a href="{{ route('aslab.pengadaan.edit', $pengadaan->id) }}" class="action-btn" title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
                                             <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $pengadaan->id }})">
@@ -155,7 +155,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-pengadaan/' + id;
+                form.action = '{{ route('aslab.pengadaan.destroy', '') }}' + id;
                 form.submit();
             }
         }

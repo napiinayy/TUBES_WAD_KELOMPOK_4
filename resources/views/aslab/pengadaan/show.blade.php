@@ -18,19 +18,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-dashboard">Beranda</a>
+                        <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link active" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profil</a>
@@ -53,10 +53,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/test-dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/test-pengadaan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
+                                <a href="{{ route('aslab.pengadaan.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
                             </li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -118,12 +118,12 @@
                     
                     <!-- Detail Footer -->
                     <div class="detail-footer">
-                        <a href="/test-pengadaan" class="btn btn-secondary">
+                        <a href="{{ route('aslab.pengadaan.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i>
                             Kembali
                         </a>
                         <div class="detail-actions">
-                            <a href="/test-pengadaan/{{ $pengadaan->id }}/edit" class="btn btn-primary">
+                            <a href="{{ route('aslab.pengadaan.edit', $pengadaan->id) }}" class="btn btn-primary">
                                 <i class="bi bi-pencil me-2"></i>
                                 Edit
                             </a>
@@ -149,7 +149,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-pengadaan/' + id;
+                form.action = '{{ route('aslab.pengadaan.destroy', '') }}' + id;
                 form.submit();
             }
         }

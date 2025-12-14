@@ -50,8 +50,7 @@ class UserController extends Controller
             'kode_aslab' => 'required|string|max:50|unique:users,kode_aslab',
             'email' => 'nullable|email|max:255|unique:users,email',
             'username' => 'required|string|max:100|unique:users,username',
-            'id_labs' => 'nullable|array', // For multiple labs
-            'id_labs.*' => 'exists:labs,id',
+            'id_lab' => 'nullable|exists:labs,id',
             'jurusan' => 'nullable|string|max:100',
             'role' => 'required|in:aslab,admin',
             'password' => 'required|string|min:8|confirmed',
@@ -61,23 +60,20 @@ class UserController extends Controller
         if ($validated['role'] === 'admin') {
             $validated['id_lab'] = null;
             $validated['jurusan'] = null;
-            $validated['id_labs'] = [];
         } elseif ($validated['role'] === 'aslab') {
             $request->validate([
-                'id_labs' => 'required|array|min:1',
+                'id_lab' => 'required|exists:labs,id',
                 'jurusan' => 'required|string|max:100',
             ]);
-            // Set primary lab to first one
-            $validated['id_lab'] = $validated['id_labs'][0] ?? null;
         }
 
         $validated['password'] = Hash::make($validated['password']);
 
         $user = User::create($validated);
 
-        // Attach labs for aslab
-        if ($validated['role'] === 'aslab' && !empty($validated['id_labs'])) {
-            $user->labs()->attach($validated['id_labs']);
+        // Attach lab for aslab
+        if ($validated['role'] === 'aslab' && $validated['id_lab']) {
+            $user->labs()->attach($validated['id_lab']);
         }
 
         return redirect()
@@ -180,24 +176,16 @@ class UserController extends Controller
         
         // Prevent deleting super admin or self
         if ($user->role === 'super_admin') {
-            return response()->json([
-                'success' => false,
-                'message' => 'Tidak dapat menghapus Super Admin'
-            ], 403);
+            return redirect()->back()->with('error', 'Tidak dapat menghapus Super Admin');
         }
 
         if ($user->id === auth()->id()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Tidak dapat menghapus akun sendiri'
-            ], 403);
+            return redirect()->back()->with('error', 'Tidak dapat menghapus akun sendiri');
         }
 
         $user->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pengguna berhasil dihapus'
-        ]);
+        return redirect()->route('admin.users.index')
+                         ->with('success', 'Pengguna berhasil dihapus');
     }
 }
