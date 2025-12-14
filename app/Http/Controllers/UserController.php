@@ -69,6 +69,9 @@ class UserController extends Controller
 
         $validated['password'] = Hash::make($validated['password']);
 
+        // Set name field to nama_lengkap for consistency
+        $validated['name'] = $validated['nama_lengkap'];
+
         $user = User::create($validated);
 
         // Attach lab for aslab
@@ -159,6 +162,9 @@ class UserController extends Controller
         } else {
             unset($validated['password']);
         }
+
+        // Set name field to nama_lengkap for consistency
+        $validated['name'] = $validated['nama_lengkap'];
 
         $user->update($validated);
 

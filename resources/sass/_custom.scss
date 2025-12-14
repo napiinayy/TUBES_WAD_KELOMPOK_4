@@ -131,6 +131,38 @@ body {
       opacity: 0.5;
       margin-top: 8px;
     }
+
+    .logout-section {
+      margin-bottom: 12px;
+
+      .btn-logout {
+        background: none;
+        border: 1px solid rgba(50, 77, 103, 0.3);
+        color: #324d67;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #f8f9fa;
+          border-color: #324d67;
+          color: #324d67;
+        }
+
+        i {
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 

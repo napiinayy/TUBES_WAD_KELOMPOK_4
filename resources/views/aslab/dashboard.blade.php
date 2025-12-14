@@ -28,7 +28,7 @@
                         <a class="nav-link" href="/aslab/peminjaman">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/kategori">Kategori Barang</a>

@@ -28,15 +28,24 @@
                         <a class="nav-link active" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/users">Profil</a>
+                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <div class="logout-section">
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn-logout">
+                            <i class="bi bi-box-arrow-right me-2"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -76,9 +85,9 @@
                             </div>
                         </div>
                         
-                        <a href="/admin/kategori/create" class="btn btn-primary">
+                        <a href="{{ route('admin.kategori.create') }}" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
-                            Tambah Barang
+                            Tambah Kategori
                         </a>
                     </div>
                     
@@ -87,17 +96,39 @@
                             <table class="table dashboard-table mb-0" id="kategoriTable">
                                 <thead>
                                     <tr>
-                                        <th style="width: 15%;">ID BARANG</th>
-                                        <th style="width: 35%;">NAMA BARANG</th>
-                                        <th style="width: 30%;">JENIS BARANG</th>
+                                        <th style="width: 15%;">ID Kategori</th>
+                                        <th style="width: 35%;">Nama Kategori</th>
+                                        <th style="width: 30%;">Deskripsi</th>
                                         <th style="width: 20%;" class="text-end">AKSI</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($items ?? [] as $item)
-                                        <tr data-category="{{ $item->jenis_barang }}">
-                                            <td><span class="req-id">#{{ str_pad($item->id, 4, '0', STR_PAD_LEFT) }}</span></td>
-                                            <td><div class="item-name">{{ $item->nama_barang }}</div></td>
+                                    @forelse($kategoris ?? [] as $kategori)
+                                        <tr>
+                                            <td><span class="req-id">#{{ str_pad($kategori->id, 4, '0', STR_PAD_LEFT) }}</span></td>
+                                            <td><div class="item-name">{{ $kategori->nama_kategori }}</div></td>
+                                            <td><span class="date-text">{{ $kategori->deskripsi }}</span></td>
+                                            <td class="text-end">
+                                                <a href="{{ route('admin.kategori.show', $kategori->id) }}" class="action-btn" title="View">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a href="{{ route('admin.kategori.edit', $kategori->id) }}" class="action-btn" title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $kategori->id }})">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center py-4">
+                                            <p class="text-muted mb-0">Belum ada data kategori</p>
+                                        </td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
                                             <td><span class="date-text">{{ $item->jenis_barang }}</span></td>
                                             <td class="text-end">
                                                 <a href="/admin/kategori/{{ $item->id }}" class="action-btn" title="View">
@@ -306,9 +337,9 @@
         
         // Confirm delete
         function confirmDelete(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/admin/kategori/' + id;
+                form.action = '{{ route('admin.kategori.destroy', '') }}' + id;
                 form.submit();
             }
         }

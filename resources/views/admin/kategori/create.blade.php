@@ -18,7 +18,7 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                        <a class="nav-link" href="/home">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/users">Kelola Profil Pengguna</a>
@@ -27,12 +27,24 @@
                         <a class="nav-link active" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/profil">Profil</a>
+                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <div class="logout-section">
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn-logout">
+                            <i class="bi bi-box-arrow-right me-2"></i>
+                            Logout
+                        </button>
+                    </form>
+                </div>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -47,10 +59,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/admin/dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
+                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="admin/kategori" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kategori Barang</a>
+                                <a href="{{ route('admin.kategori.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kategori Barang</a>
                             </li>
                             <li class="breadcrumb-item active">Tambah Barang</li>
                         </ol>
@@ -64,7 +76,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="admin/kategori">
+                    <form method="POST" action="{{ route('admin.kategori.store') }}">
                         @csrf
                         
                         <div class="form-section">
@@ -120,7 +132,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="admin/kategori" class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('admin.kategori.index') }}" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-save me-2"></i>
                                 Simpan

@@ -10,12 +10,12 @@ class KeluhanController extends Controller
     public function index()
     {
         $keluhans = Keluhan::latest()->get();
-        return view('aslab.keluhan.index', compact('keluhans'));
+        return view('admin.keluhan.index', compact('keluhans'));
     }
 
     public function create()
     {
-        return view('aslab.keluhan.create');
+        return view('admin.keluhan.create');
     }
 
     public function store(Request $request)
@@ -33,21 +33,46 @@ class KeluhanController extends Controller
             'status' => 'pending',
         ]);
 
-        return redirect('/test-keluhan')
+        return redirect()->route('admin.keluhan.index')
             ->with('success', 'Keluhan berhasil dikirim');
     }
 
     public function show($id)
     {
         $keluhan = Keluhan::findOrFail($id);
-        return view('aslab.keluhan.show', compact('keluhan'));
+        return view('admin.keluhan.show', compact('keluhan'));
+    }
+
+    public function edit($id)
+    {
+        $keluhan = Keluhan::findOrFail($id);
+        return view('admin.keluhan.edit', compact('keluhan'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_item' => 'required|string|max:255',
+            'jenis_keluhan' => 'required|string',
+            'deskripsi_keluhan' => 'required|string',
+        ]);
+
+        $keluhan = Keluhan::findOrFail($id);
+        $keluhan->update([
+            'nama_item' => $request->nama_item,
+            'jenis_keluhan' => $request->jenis_keluhan,
+            'deskripsi_keluhan' => $request->deskripsi_keluhan,
+        ]);
+
+        return redirect()->route('admin.keluhan.index')
+            ->with('success', 'Keluhan berhasil diperbarui');
     }
 
     public function destroy($id)
     {
-    $keluhan = Keluhan::findOrFail($id);
-    $keluhan->delete();
-    return redirect('/test-keluhan')
-        ->with('success', 'Keluhan berhasil dihapus');
+        $keluhan = Keluhan::findOrFail($id);
+        $keluhan->delete();
+        return redirect()->route('admin.keluhan.index')
+            ->with('success', 'Keluhan berhasil dihapus');
     }
 }
