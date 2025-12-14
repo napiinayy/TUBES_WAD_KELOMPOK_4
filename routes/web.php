@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KategoriController;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('test-admin')->group(function () {
+    Route::resource('kategori', KategoriController::class);
 });
