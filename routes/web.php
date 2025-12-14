@@ -12,3 +12,4 @@ Route::prefix('peminjaman')->group(function () {
     Route::put('/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
     Route::delete('/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
 });
+//ini aku ubah juga//
