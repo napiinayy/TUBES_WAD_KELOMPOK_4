@@ -25,7 +25,13 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
+            'nama_lengkap' => fake()->name(),
+            'kode_aslab' => fake()->unique()->numberBetween(1000, 9999),
             'email' => fake()->unique()->safeEmail(),
+            'username' => fake()->unique()->userName(),
+            'id_lab' => 1, // Assume lab id 1 exists
+            'jurusan' => fake()->randomElement(['Informatika', 'Sistem Informasi', 'Teknik Komputer']),
+            'role' => fake()->randomElement(['aslab', 'admin']),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),

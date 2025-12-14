@@ -2,114 +2,34 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KeluhanController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PengadaanController;
 
-// Route untuk index (list pengadaan)
-Route::get('/test-pengadaan', function () {
-    $pengadaans = collect([
-        (object)[
-            'id' => 1,
-            'nama_barang' => 'monitor',
-            'jumlah' => 5,
-            'pengaju' => 'Rizaldy',
-            'status' => 'pending',
-            'created_at' => now(),
-            'lab' => (object)['nama_lab' => 'SISJAR lab']
-        ],
-        (object)[
-            'id' => 2,
-            'nama_barang' => 'ERP License',
-            'jumlah' => 100,
-            'pengaju' => 'Khaira',
-            'status' => 'approved',
-            'created_at' => now()->subDays(2),
-            'lab' => (object)['nama_lab' => 'ERP Lab']
-        ],
-        (object)[
-            'id' => 3,
-            'nama_barang' => 'proyektor',
-            'jumlah' => 3,
-            'pengaju' => 'Ayya',
-            'status' => 'completed',
-            'created_at' => now()->subDays(5),
-            'lab' => (object)['nama_lab' => 'EAD Lab']
-        ],
-    ]);
-    
-    return view('aslab.pengadaan.index', compact('pengadaans'));
+Auth::routes();
+
+Route::get('/', function () {
+    return redirect('/login');
 });
 
-// Route untuk create (form tambah)
-Route::get('/test-pengadaan/create', function () {
-    $kategoris = collect([
-        (object)['id' => 1, 'nama_barang' => 'monitor', 'jenis_barang' => 'Alat Laboratorium'],
-        (object)['id' => 2, 'nama_barang' => 'ERP License', 'jenis_barang' => 'student license '],
-        (object)['id' => 3, 'nama_barang' => 'proyektor ', 'jenis_barang' => 'Alat Praktikum'],
-    ]);
-    
-    $labs = collect([
-        (object)['id' => 1, 'nama_lab' => 'SISJAR Lab'],
-        (object)['id' => 2, 'nama_lab' => 'ERP Lab'],
-        (object)['id' => 3, 'nama_lab' => 'EAD Lab'],
-    ]);
-    
-    return view('aslab.pengadaan.create', compact('kategoris', 'labs'));
-});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('admin/users', UserController::class)->names('admin.users');
+    Route::resource('admin/kategori', KategoriController::class)->names('admin.kategori');
+    Route::resource('admin/keluhan', KeluhanController::class)->names('admin.keluhan');
+    Route::resource('aslab/pengadaan', PengadaanController::class);
 
-// Route untuk show (detail)
-Route::get('/test-pengadaan/{id}', function ($id) {
-    $pengadaan = (object)[
-        'id' => $id,
-        'nama_barang' => 'monitor',
-        'jumlah' => 5,
-        'pengaju' => 'Rizaldy',
-        'status' => 'pending',
-        'spesifikasi' => 'monitor merk spesifik yaitu HP',
-        'alasan_pengadaan' => 'untuk menggantikan monitor lama yang performa sudah menurun sehingga memperlancar proses praktikum',
-        'created_at' => now(),
-        'lab' => (object)['nama_lab' => 'SISJAR Lab']
-    ];
-    
-    return view('aslab.pengadaan.show', compact('pengadaan'));
-});
-
-// Route untuk edit (form edit)
-Route::get('/test-pengadaan/{id}/edit', function ($id) {
-    $pengadaan = (object)[
-        'id' => $id,
-        'id_kategori' => 1,
-        'nama_barang' => 'monitor',
-        'spesifikasi' => 'monitor merk HP',
-        'id_lab' => 1,
-        'jumlah' => 5,
-        'alasan_pengadaan' => 'Untuk praktikum mahasiswa',
-    ];
-    
-    $kategoris = collect([
-        (object)['id' => 1, 'nama_barang' => 'monitor', 'jenis_barang' => 'Alat Laboratorium'],
-        (object)['id' => 2, 'nama_barang' => 'ERP License ', 'jenis_barang' => 'student license '],
-        (object)['id' => 3, 'nama_barang' => 'proyektor', 'jenis_barang' => 'Alat Praktikum'],
-    ]);
-    
-    $labs = collect([
-        (object)['id' => 1, 'nama_lab' => 'SISJAR Lab'],
-        (object)['id' => 2, 'nama_lab' => 'ERP Lab'],
-        (object)['id' => 3, 'nama_lab' => 'EAD Lab'],
-    ]);
-    
-    return view('aslab.pengadaan.edit', compact('pengadaan', 'kategoris', 'labs'));
-});
-
-// Route untuk POST (submit form)
-Route::post('/test-pengadaan', function () {
-    return redirect('/test-pengadaan')->with('success', 'Data berhasil ditambahkan (Mode Testing)');
-});
-
-// Route untuk PUT (update form)
-Route::put('/test-pengadaan/{id}', function ($id) {
-    return redirect('/test-pengadaan')->with('success', 'Data berhasil diupdate (Mode Testing)');
-});
-
-// Route untuk DELETE
-Route::delete('/test-pengadaan/{id}', function ($id) {
-    return redirect('/test-pengadaan')->with('success', 'Data berhasil dihapus (Mode Testing)');
+    Route::prefix('aslab/peminjaman')->group(function () {
+        Route::get('/', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+        Route::get('/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
+        Route::post('/', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+        Route::get('/{id}', [PeminjamanController::class, 'show'])->name('peminjaman.show');
+        Route::get('/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
+        Route::put('/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
+        Route::delete('/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
+    });
 });

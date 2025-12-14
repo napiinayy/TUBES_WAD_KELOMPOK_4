@@ -14,7 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('nama_lengkap');
+            $table->string('kode_aslab')->unique();
             $table->string('email')->unique();
+            $table->string('username')->unique();
+            $table->foreignId('id_lab')->constrained('labs')->onDelete('cascade');
+            $table->string('jurusan');
+            $table->enum('role', ['aslab', 'admin', 'super_admin'])->default('aslab');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
