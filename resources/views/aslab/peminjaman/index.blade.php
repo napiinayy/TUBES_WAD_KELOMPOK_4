@@ -27,10 +27,10 @@
                         <a class="nav-link active" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profil</a>
@@ -86,7 +86,6 @@
                             <table class="table dashboard-table mb-0">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;"><div class="form-check"><input class="form-check-input" type="checkbox" id="selectAll"></div></th>
                                         <th style="width: 10%;">ID Peminjaman</th>
                                         <th style="width: 18%;">Nama Barang</th>
                                         <th style="width: 12%;">Peminjam</th>
@@ -101,11 +100,10 @@
                                 <tbody>
                                     @forelse($peminjamans ?? [] as $peminjaman)
                                     <tr>
-                                        <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                                         <td><span class="req-id">#BRW-{{ str_pad($peminjaman->id, 4, '0', STR_PAD_LEFT) }}</span></td>
                                         <td><div class="item-name">{{ $peminjaman->nama_barang }}</div></td>
                                         <td>
-                                            <div class="borrower-name">{{ $peminjaman->peminjam ?? 'User' }}</div>
+                                            <div class="borrower-name">{{ $peminjaman->user->nama_lengkap ?? 'User' }}</div>
                                             <div class="borrower-dept">{{ $peminjaman->lab->nama_lab ?? 'N/A' }}</div>
                                         </td>
                                         <td><span class="date-text">{{ $peminjaman->kelas }}</span></td>
@@ -127,7 +125,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="10" class="text-center py-4">
+                                        <td colspan="9" class="text-center py-4">
                                             <p class="text-muted mb-0">Belum ada data peminjaman barang</p>
                                         </td>
                                     </tr>
@@ -159,7 +157,8 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '{{ route('peminjaman.destroy', '') }}' + id;
+                const baseUrl = '{{ route("peminjaman.destroy", ":id") }}';
+                form.action = baseUrl.replace(':id', id);
                 form.submit();
             }
         }

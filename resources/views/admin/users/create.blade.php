@@ -4,12 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Tambah Pengguna - Admin</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
+    <!-- Bootstrap JS CDN as fallback -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <div class="main-container">
@@ -24,10 +28,13 @@
                         <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
+                        <a class="nav-link" href="/admin/barang">Daftar Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
@@ -36,15 +43,12 @@
             </div>
             
             <div class="sidebar-footer">
-                <div class="logout-section">
-                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn-logout">
-                            <i class="bi bi-box-arrow-right me-2"></i>
-                            Logout
-                        </button>
-                    </form>
-                </div>
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -153,26 +157,35 @@
                                 <!-- Nama Laboratorium -->
                                 <div class="form-group">
                                     <label for="id_lab" class="form-label required">Nama Laboratorium</label>
-                                    <select class="form-control @error('id_lab') is-invalid @enderror" 
-                                            id="id_lab" 
-                                            name="id_lab"
-                                            required>
-                                        <option value="">Pilih Laboratorium</option>
-                                        @foreach($labs ?? [] as $lab)
-                                            <option value="{{ $lab->id }}" {{ old('id_lab') == $lab->id ? 'selected' : '' }}>
-                                                {{ $lab->nama_lab }}
-                                            </option>
-                                        @endforeach
-                                        @if(!isset($labs) || count($labs) == 0)
-                                            <option value="1">Lab Kimia</option>
-                                            <option value="2">Lab Fisika</option>
-                                            <option value="3">Lab Biologi</option>
-                                            <option value="4">Lab Komputer</option>
-                                        @endif
-                                    </select>
-                                    @error('id_lab')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <div style="display: flex; gap: 8px; align-items: start;">
+                                        <div style="flex: 1;">
+                                            <select class="form-control @error('id_lab') is-invalid @enderror" 
+                                                    id="id_lab" 
+                                                    name="id_lab[]"
+                                                    multiple
+                                                    size="5"
+                                                    required>
+                                                @foreach($labs ?? [] as $lab)
+                                                    <option value="{{ $lab->id }}" {{ (is_array(old('id_lab')) && in_array($lab->id, old('id_lab'))) ? 'selected' : '' }}>
+                                                        {{ $lab->nama_lab }}
+                                                    </option>
+                                                @endforeach
+                                                @if(!isset($labs) || count($labs) == 0)
+                                                    <option value="1">Lab Kimia</option>
+                                                    <option value="2">Lab Fisika</option>
+                                                    <option value="3">Lab Biologi</option>
+                                                    <option value="4">Lab Komputer</option>
+                                                @endif
+                                            </select>
+                                            <small class="form-text text-muted">Tekan Ctrl (Windows) atau Cmd (Mac) untuk memilih beberapa lab</small>
+                                            @error('id_lab')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <button type="button" class="btn btn-outline-success" id="addLabBtn" style="white-space: nowrap;">
+                                            <i class="bi bi-plus-circle"></i> Tambah Lab
+                                        </button>
+                                    </div>
                                 </div>
                                 
                                 <!-- Jurusan -->
@@ -254,8 +267,124 @@
             </div>
         </main>
     </div>
+
+    <!-- Add Lab Modal -->
+    <div class="modal fade" id="addLabModal" tabindex="-1" aria-labelledby="addLabModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addLabModalLabel">Tambah Laboratorium Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addLabForm">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="nama_lab" class="form-label">Nama Laboratorium</label>
+                            <input type="text" class="form-control" id="nama_lab" name="nama_lab" placeholder="Contoh: Lab Kimia" required>
+                            <div class="invalid-feedback" id="nama_lab_error"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="saveLabBtn">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script>
+        // Wait for everything to load
+        window.addEventListener('load', function() {
+            console.log('Page loaded, setting up event listeners...');
+            console.log('Bootstrap available:', typeof bootstrap !== 'undefined');
+            
+            // Add Lab Modal Handler
+            const addLabBtn = document.getElementById('addLabBtn');
+            console.log('addLabBtn found:', addLabBtn);
+            
+            if (addLabBtn) {
+                addLabBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Tambah Lab button clicked');
+                    
+                    const modalElement = document.getElementById('addLabModal');
+                    console.log('Modal element found:', modalElement);
+                    
+                    if (modalElement && typeof bootstrap !== 'undefined') {
+                        try {
+                            const modal = new bootstrap.Modal(modalElement);
+                            modal.show();
+                            console.log('Modal shown successfully');
+                        } catch (error) {
+                            console.error('Error showing modal:', error);
+                            alert('Error: ' + error.message);
+                        }
+                    } else {
+                        console.error('Modal element or Bootstrap not found');
+                        alert('Bootstrap tidak dimuat dengan benar. Silakan refresh halaman.');
+                    }
+                });
+            } else {
+                console.error('addLabBtn not found in DOM');
+            }
+
+            // Save Lab via AJAX
+            const saveLabBtn = document.getElementById('saveLabBtn');
+            if (saveLabBtn) {
+                saveLabBtn.addEventListener('click', function() {
+                    console.log('Save Lab button clicked');
+                    const form = document.getElementById('addLabForm');
+                    const formData = new FormData(form);
+                    
+                    fetch('{{ route("admin.labs.store") }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    })
+                    .then(response => {
+                        console.log('Response status:', response.status);
+                        if (!response.ok) {
+                            return response.text().then(text => {
+                                throw new Error(`Server error: ${response.status} - ${text}`);
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Server response:', data);
+                        if (data.success) {
+                            // Add new lab to select dropdown
+                            const select = document.getElementById('id_lab');
+                            const option = new Option(data.lab.nama_lab, data.lab.id, true, true);
+                            select.add(option);
+                            
+                            // Close modal and reset form
+                            const modalElement = document.getElementById('addLabModal');
+                            const modal = bootstrap.Modal.getInstance(modalElement);
+                            if (modal) {
+                                modal.hide();
+                            }
+                            form.reset();
+                            
+                            // Show success message
+                            alert(data.message);
+                        } else {
+                            alert('Gagal menambahkan lab: ' + (data.message || 'Kesalahan tidak diketahui'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Full error:', error);
+                        alert('Terjadi kesalahan: ' + error.message);
+                    });
+                });
+            }
+        });
+
         // Form validation
         (function () {
             'use strict'

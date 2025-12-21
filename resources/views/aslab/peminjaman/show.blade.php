@@ -27,13 +27,13 @@
                         <a class="nav-link active" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -74,7 +74,7 @@
                     <div class="detail-header">
                         <div>
                             <h2 class="detail-id">#BRW-{{ str_pad($peminjaman->id, 4, '0', STR_PAD_LEFT) }}</h2>
-                            <p class="detail-date">Peminjam: {{ $peminjaman->peminjam }}</p>
+                            <p class="detail-date">Peminjam: {{ $peminjaman->user->nama_lengkap ?? 'User' }}</p>
                         </div>
                         <span class="badge badge-{{ strtolower($peminjaman->status) }} badge-lg">
                             {{ ucfirst($peminjaman->status) }}
@@ -162,7 +162,8 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/test-peminjaman/' + id;
+                const baseUrl = '{{ route("peminjaman.destroy", ":id") }}';
+                form.action = baseUrl.replace(':id', id);
                 form.submit();
             }
         }

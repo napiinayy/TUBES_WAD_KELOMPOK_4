@@ -24,7 +24,10 @@
                         <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
+                        <a class="nav-link" href="/admin/barang">Daftar Barang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/keluhan">Keluhan</a>
@@ -36,15 +39,12 @@
             </div>
             
             <div class="sidebar-footer">
-                <div class="logout-section">
-                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn-logout">
-                            <i class="bi bi-box-arrow-right me-2"></i>
-                            Logout
-                        </button>
-                    </form>
-                </div>
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>

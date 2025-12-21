@@ -27,18 +27,24 @@
                         <a class="nav-link" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-profil">Profil</a>
+                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -56,7 +62,7 @@
                                 <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/aslab/pengadaan" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
+                                <a href="{{ route('aslab.pengadaan.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Pengadaan Barang</a>
                             </li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
@@ -88,15 +94,11 @@
                                     <option value="">Pilih Kategori</option>
                                     @foreach($kategoris ?? [] as $kategori)
                                         <option value="{{ $kategori->id }}" {{ old('id_kategori', $pengadaan->id_kategori ?? '') == $kategori->id ? 'selected' : '' }}>
-                                            {{ $kategori->nama_barang }} - {{ $kategori->jenis_barang }}
+                                            {{ $kategori->nama_kategori }}
                                         </option>
                                     @endforeach
                                     @if(!isset($kategoris) || count($kategoris) == 0)
-                                        <option value="1" {{ old('id_kategori', $pengadaan->id_kategori ?? '') == 1 ? 'selected' : '' }}>Mikroskop Digital - Alat Laboratorium</option>
-                                        <option value="2" {{ old('id_kategori', $pengadaan->id_kategori ?? '') == 2 ? 'selected' : '' }}>Beaker Glass 500ml - Peralatan Gelas</option>
-                                        <option value="3" {{ old('id_kategori', $pengadaan->id_kategori ?? '') == 3 ? 'selected' : '' }}>pH Meter Digital - Alat Ukur</option>
-                                        <option value="4" {{ old('id_kategori', $pengadaan->id_kategori ?? '') == 4 ? 'selected' : '' }}>Bunsen Burner - Alat Pemanas</option>
-                                        <option value="5" {{ old('id_kategori', $pengadaan->id_kategori ?? '') == 5 ? 'selected' : '' }}>Centrifuge - Alat Laboratorium</option>
+                                        <option value="" disabled>Belum ada kategori tersedia</option>
                                     @endif
                                 </select>
                                 @error('id_kategori')

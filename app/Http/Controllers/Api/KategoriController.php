@@ -18,7 +18,7 @@ class KategoriController extends WebKategoriController
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'nama_kategori' => 'required|string|max:255',
+            'nama_barang' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
         ]);
 
@@ -35,7 +35,7 @@ class KategoriController extends WebKategoriController
     public function update(Request $request, $id): JsonResponse
     {
         $validated = $request->validate([
-            'nama_kategori' => 'required|string|max:255',
+            'nama_barang' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
         ]);
 
