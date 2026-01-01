@@ -18,27 +18,33 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Beranda</a>
+                        <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/aslab/pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/aslab/peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/admin/users">Profil</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-profil">Profil</a>
+                        <a class="nav-link active" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -63,7 +69,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/admin/users/{{ auth()->id() }}/{{ auth()->id() }}">
+                    <form method="POST" action="{{ route('admin.users.update', auth()->id()) }}">
                         @csrf
                         @method('PUT')
                         
@@ -127,12 +133,70 @@
                             </div>
                         </div>
                         
+                        <!-- Academic Information Section (Read-only) -->
+                        <div class="form-section">
+                            <h3 class="section-title">Informasi Akademik</h3>
+                            <p class="text-muted mb-3"><small><i class="bi bi-info-circle"></i> Informasi ini hanya dapat diubah oleh admin</small></p>
+                            
+                            <!-- Nama Laboratorium -->
+                            <div class="form-group">
+                                <label class="form-label">Nama Laboratorium</label>
+                                @php
+                                    $userLabs = $user->labs ?? collect();
+                                    $labCount = $userLabs->count();
+                                @endphp
+                                
+                                @if($labCount === 1)
+                                    {{-- Single lab: Show as simple read-only field --}}
+                                    <input type="text" 
+                                           class="form-control" 
+                                           value="{{ $userLabs->first()->nama_lab }}"
+                                           readonly>
+                                @elseif($labCount > 1)
+                                    {{-- Multiple labs: Show as badges/tags --}}
+                                    <div class="lab-badges-container" style="display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; min-height: 48px;">
+                                        @foreach($userLabs as $lab)
+                                            <span class="badge bg-success" style="font-size: 14px; padding: 8px 12px; font-weight: 500;">
+                                                <i class="bi bi-building"></i> {{ $lab->nama_lab }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <input type="text" 
+                                           class="form-control" 
+                                           value="Tidak ada lab terdaftar"
+                                           readonly>
+                                @endif
+                            </div>
+                            
+                            <!-- Jurusan -->
+                            <div class="form-group">
+                                <label class="form-label">Jurusan</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       value="{{ $user->jurusan ?? '-' }}"
+                                       readonly>
+                            </div>
+                            
+                            <!-- Role -->
+                            <div class="form-group">
+                                <label class="form-label">Role</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       value="{{ ucfirst($user->role ?? 'aslab') }}"
+                                       readonly>
+                            </div>
+                        </div>
+                        
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/home" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('admin.users.edit', auth()->id()) }}" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Batal
+                            </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-send me-2"></i>
-                                Kirim
+                                <i class="bi bi-save me-2"></i>
+                                Simpan Perubahan
                             </button>
                         </div>
                     </form>

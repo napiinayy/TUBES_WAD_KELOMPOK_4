@@ -19,6 +19,167 @@
             <div class="admin-content-wrapper">
                 <h1 class="admin-welcome-title">Selamat Datang</h1>
                 
+                <!-- Statistics Cards -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>{{ $totalUsers }}</h3>
+                            <p>Total Pengguna</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-tags-fill"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>{{ $totalBarangs }}</h3>
+                            <p>Total Barang</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="bi bi-exclamation-triangle-fill"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>{{ $totalKeluhans }}</h3>
+                            <p>Total Keluhan</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Latest Entries Tables -->
+                <div class="latest-entries-container">
+                    <!-- Latest Users Table -->
+                    <div class="table-section">
+                        <div class="table-header-admin">
+                            <h3>Pengguna Terbaru</h3>
+                            <a href="{{ route('admin.users.index') }}" class="view-all-link">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="table-container-admin">
+                            <div class="table-responsive">
+                                <table class="table dashboard-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25%;">Nama Lengkap</th>
+                                            <th style="width: 20%;">Username</th>
+                                            <th style="width: 15%;">Role</th>
+                                            <th style="width: 25%;">Laboratorium</th>
+                                            <th style="width: 15%;">Tanggal Dibuat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($latestUsers as $user)
+                                            <tr>
+                                                <td><div class="item-name">{{ $user->nama_lengkap }}</div></td>
+                                                <td><span class="req-id">{{ $user->username }}</span></td>
+                                                <td><span class="badge bg-primary">{{ ucfirst($user->role) }}</span></td>
+                                                <td><span class="date-text">{{ $user->lab_name }}</span></td>
+                                                <td><span class="date-text">{{ $user->created_at->format('M d, Y') }}</span></td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center">Belum ada pengguna</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latest Barang Table -->
+                    <div class="table-section">
+                        <div class="table-header-admin">
+                            <h3>Barang Terbaru</h3>
+                            <a href="{{ route('admin.barang.index') }}" class="view-all-link">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="table-container-admin">
+                            <div class="table-responsive">
+                                <table class="table dashboard-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 30%;">Nama Barang</th>
+                                            <th style="width: 30%;">Kategori</th>
+                                            <th style="width: 20%;">Deskripsi</th>
+                                            <th style="width: 20%;">Tanggal Dibuat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($latestBarangs as $barang)
+                                            <tr>
+                                                <td><div class="item-name">{{ $barang->nama_barang }}</div></td>
+                                                <td><span class="date-text">{{ $barang->kategori->nama_kategori ?? '-' }}</span></td>
+                                                <td><span class="date-text">{{ $barang->deskripsi ?? '-' }}</span></td>
+                                                <td><span class="date-text">{{ $barang->created_at->format('M d, Y') }}</span></td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">Belum ada barang</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latest Complaints Table -->
+                    <div class="table-section">
+                        <div class="table-header-admin">
+                            <h3>Keluhan Terbaru</h3>
+                            <a href="{{ route('admin.keluhan.index') }}" class="view-all-link">
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="table-container-admin">
+                            <div class="table-responsive">
+                                <table class="table dashboard-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 40%;">Keluhan</th>
+                                            <th style="width: 25%;">Pelapor</th>
+                                            <th style="width: 20%;">Status</th>
+                                            <th style="width: 15%;">Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse($latestKeluhans as $keluhan)
+                                            <tr>
+                                                <td><div class="item-name">{{ Str::limit($keluhan->nama_item, 50) }}</div></td>
+                                                <td>
+                                                    <div class="submitter-name">{{ $keluhan->pelapor ?? 'N/A' }}</div>
+                                                    <div class="submitter-dept">{{ $keluhan->jenis_keluhan }}</div>
+                                                </td>
+                                                <td>
+                                                    <span class="badge 
+                                                        @if($keluhan->status == 'pending') bg-warning
+                                                        @elseif($keluhan->status == 'resolved') bg-success
+                                                        @elseif($keluhan->status == 'rejected') bg-danger
+                                                        @endif">
+                                                        {{ ucfirst($keluhan->status) }}
+                                                    </span>
+                                                </td>
+                                                <td><span class="date-text">{{ $keluhan->created_at->format('M d, Y') }}</span></td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">Belum ada keluhan</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Pengajuan Barang Table -->
                 <div class="table-section">
                     <div class="table-header-admin">
@@ -29,7 +190,6 @@
                             <table class="table dashboard-table mb-0">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;"><div class="form-check"><input class="form-check-input" type="checkbox" id="selectAllPengajuan"></div></th>
                                         <th style="width: 12%;">ID Permintaan</th>
                                         <th style="width: 20%;">Detail Barang</th>
                                         <th style="width: 15%;">Pengaju</th>
@@ -41,12 +201,11 @@
                                 <tbody>
                                     @forelse($pengadaan ?? [] as $item)
                                         <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                                             <td><span class="req-id">{{ $item->id }}</span></td>
                                             <td><div class="item-name">{{ $item->nama_barang }}</div></td>
                                             <td>
-                                                <div class="submitter-name">{{ $item->user->nama_lengkap }}</div>
-                                                <div class="submitter-dept">{{ $item->lab->nama_lab }}</div>
+                                                <div class="submitter-name">{{ $item->pengaju ?? 'N/A' }}</div>
+                                                <div class="submitter-dept">{{ $item->lab->nama_lab ?? 'N/A' }}</div>
                                             </td>
                                             <td><span class="date-text">{{ $item->created_at->format('M d, Y') }}</span></td>
                                             <td><span class="quantity-badge">{{ $item->jumlah }}</span></td>
@@ -62,7 +221,6 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                                             <td><span class="req-id">#REQ-2048</span></td>
                                             <td><div class="item-name">Digital Centrifuge</div></td>
                                             <td>
@@ -80,7 +238,6 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                                             <td><span class="req-id">#REQ-2047</span></td>
                                             <td><div class="item-name">Beaker Set (500ml)</div></td>
                                             <td>
@@ -114,7 +271,6 @@
                             <table class="table dashboard-table mb-0">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;"><div class="form-check"><input class="form-check-input" type="checkbox" id="selectAllPeminjaman"></div></th>
                                         <th style="width: 10%;">ID Peminjaman</th>
                                         <th style="width: 18%;">Nama Barang</th>
                                         <th style="width: 12%;">Peminjam</th>
@@ -128,12 +284,11 @@
                                 <tbody>
                                     @forelse($peminjaman ?? [] as $item)
                                         <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                                             <td><span class="req-id">{{ $item->id }}</span></td>
                                             <td><div class="item-name">{{ $item->nama_barang }}</div></td>
                                             <td>
-                                                <div class="borrower-name">{{ $item->user->nama_lengkap }}</div>
-                                                <div class="borrower-dept">{{ $item->lab->nama_lab }}</div>
+                                                <div class="borrower-name">{{ $item->user->nama_lengkap ?? 'N/A' }}</div>
+                                                <div class="borrower-dept">{{ $item->lab->nama_lab ?? 'N/A' }}</div>
                                             </td>
                                             <td><span class="date-text">{{ $item->kelas }}</span></td>
                                             <td><span class="date-text">{{ $item->tanggal_pinjam }}</span></td>
@@ -151,7 +306,6 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                                             <td><span class="req-id">#BRW-1025</span></td>
                                             <td><div class="item-name">Microscope Olympus CX23</div></td>
                                             <td>
@@ -176,91 +330,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Keluhan Table -->
-                <div class="table-section">
-                    <div class="table-header-admin">
-                        <h3>Laporan Keluhan</h3>
-                    </div>
-                    <div class="table-container-admin">
-                        <div class="table-responsive">
-                            <table class="table dashboard-table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%;"><div class="form-check"><input class="form-check-input" type="checkbox" id="selectAllPengajuan"></div></th>
-                                        <th style="width: 15%;">ID Permintaan</th>
-                                        <th style="width: 25%;">Detail Barang</th>
-                                        <th style="width: 18%;">Pengaju</th>
-                                        <th style="width: 15%;">Tanggal</th>
-                                        <th style="width: 10%;">Jumlah</th>
-                                        <th style="width: 12%;">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($keluhan ?? [] as $item)
-                                        <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
-                                            <td><span class="req-id">{{ $item->id }}</span></td>
-                                            <td><div class="item-name">{{ $item->keluhan }}</div></td>
-                                            <td>
-                                                <div class="submitter-name">{{ $item->user->nama_lengkap }}</div>
-                                                <div class="submitter-dept">{{ $item->lab->nama_lab }}</div>
-                                            </td>
-                                            <td><span class="date-text">{{ $item->created_at->format('M d, Y') }}</span></td>
-                                            <td><span class="quantity-badge">1</span></td>
-                                            <td>
-                                                <select class="form-select form-select-sm status-select" 
-                                                        data-id="{{ $item->id }}" 
-                                                        data-type="keluhan">
-                                                    <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                                    <option value="proses" {{ $item->status == 'proses' ? 'selected' : '' }}>Proses</option>
-                                                    <option value="selesai" {{ $item->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
-                                            <td><span class="req-id">#KLH-001</span></td>
-                                            <td><div class="item-name">Komputer Rusak</div></td>
-                                            <td>
-                                                <div class="submitter-name">Michael Chen</div>
-                                                <div class="submitter-dept">Lab Komputer</div>
-                                            </td>
-                                            <td><span class="date-text">Oct 20, 2023</span></td>
-                                            <td><span class="quantity-badge">1</span></td>
-                                            <td>
-                                                <select class="form-select form-select-sm status-select">
-                                                    <option value="pending" selected>Pending</option>
-                                                    <option value="proses">Proses</option>
-                                                    <option value="selesai">Selesai</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
-                                            <td><span class="req-id">#KLH-002</span></td>
-                                            <td><div class="item-name">Proyektor tidak ada suaranya</div></td>
-                                            <td>
-                                                <div class="submitter-name">Lisa Anderson</div>
-                                                <div class="submitter-dept">Lab Fisika</div>
-                                            </td>
-                                            <td><span class="date-text">Oct 19, 2023</span></td>
-                                            <td><span class="quantity-badge">1</span></td>
-                                            <td>
-                                                <select class="form-select form-select-sm status-select">
-                                                    <option value="pending">Pending</option>
-                                                    <option value="proses" selected>Proses</option>
-                                                    <option value="selesai">Selesai</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
         </main>
         
@@ -269,18 +338,32 @@
             <div class="admin-nav-container">
                 <ul class="admin-nav">
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link active" href="/admin/dashboard">Dashboard</a>
+                        <a class="admin-nav-link active" href="{{ route('home') }}">Dashboard</a>
                     </li>
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link" href="/admin/users">Kelola Profil Pengguna</a>
+                        <a class="admin-nav-link" href="{{ route('admin.users.index') }}">Kelola Profil Pengguna</a>
                     </li>
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link" href="/admin/kategori">Kategori Barang</a>
+                        <a class="admin-nav-link" href="{{ route('admin.barang.index') }}">Daftar Barang</a>
                     </li>
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link" href="/admin/profil">Profil</a>
+                        <a class="admin-nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
+                    </li>
+                    <li class="admin-nav-item">
+                        <a class="admin-nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                    </li>
+                    <li class="admin-nav-item">
+                        <a class="admin-nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
                     </li>
                 </ul>
+            </div>
+            <div class="sidebar-footer" style="margin-top: auto; padding-top: 16px;">
+                <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                    @csrf
+                    <button type="submit" class="admin-nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: none; cursor: pointer; padding: 10px 12px; display: flex; align-items: center; gap: 12px;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
             </div>
         </aside>
     </div>

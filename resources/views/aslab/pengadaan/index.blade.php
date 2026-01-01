@@ -24,21 +24,27 @@
                         <a class="nav-link active" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -86,7 +92,6 @@
                             <table class="table dashboard-table mb-0">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;"><div class="form-check"><input class="form-check-input" type="checkbox" id="selectAll"></div></th>
                                         <th style="width: 12%;">ID Permintaan</th>
                                         <th style="width: 20%;">Detail Barang</th>
                                         <th style="width: 15%;">Pengaju</th>
@@ -99,7 +104,6 @@
                                 <tbody>
                                     @forelse($pengadaans ?? [] as $pengadaan)
                                     <tr>
-                                        <td><div class="form-check"><input class="form-check-input" type="checkbox"></div></td>
                                         <td><span class="req-id">#REQ-{{ str_pad($pengadaan->id, 4, '0', STR_PAD_LEFT) }}</span></td>
                                         <td><div class="item-name">{{ $pengadaan->nama_barang }}</div></td>
                                         <td>
@@ -113,17 +117,19 @@
                                             <a href="{{ route('aslab.pengadaan.show', $pengadaan->id) }}" class="action-btn" title="View">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('aslab.pengadaan.edit', $pengadaan->id) }}" class="action-btn" title="Edit">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $pengadaan->id }})">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
+                                            @if(strtolower($pengadaan->status) !== 'approved')
+                                                <a href="{{ route('aslab.pengadaan.edit', $pengadaan->id) }}" class="action-btn" title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $pengadaan->id }})">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            @endif
                                         </td>
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="8" class="text-center py-4">
+                                        <td colspan="7" class="text-center py-4">
                                             <p class="text-muted mb-0">Belum ada data pengadaan barang</p>
                                         </td>
                                     </tr>
@@ -155,7 +161,8 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '{{ route('aslab.pengadaan.destroy', '') }}' + id;
+                const baseUrl = '{{ route("aslab.pengadaan.destroy", ":id") }}';
+                form.action = baseUrl.replace(':id', id);
                 form.submit();
             }
         }

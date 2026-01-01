@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('keluhans', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('nama_item');
             $table->string('jenis_keluhan');
             $table->text('deskripsi_keluhan');
             $table->string('status')->default('pending');
             $table->string('pelapor')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

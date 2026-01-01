@@ -1,76 +1,90 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
+    /**
+     * Display a listing of the kategoris.
+     */
     public function index()
     {
-        $kategoris = Kategori::all();
-        $categories = Kategori::pluck('deskripsi')->unique();
-        return view('admin.kategori.index', compact('kategoris', 'categories'));
+        $kategoris = Kategori::orderBy('nama_kategori')->get();
+        return view('admin.kategoris.index', compact('kategoris'));
     }
 
+    /**
+     * Show the form for creating a new kategori.
+     */
     public function create()
     {
-        $categories = Kategori::pluck('deskripsi')->unique();
-        return view('admin.kategori.create', compact('categories'));
+        return view('admin.kategoris.create');
     }
 
+    /**
+     * Store a newly created kategori in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_kategori' => 'required|string|max:255',
-            'deskripsi' => 'required|string|max:255',
+        $validated = $request->validate([
+            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori',
         ]);
 
-        Kategori::create([
-            'nama_kategori' => $request->nama_kategori,
-            'deskripsi' => $request->deskripsi,
+        Kategori::create($validated);
+
+        return redirect()->route('admin.kategoris.index')
+            ->with('success', 'Kategori berhasil ditambahkan.');
+    }
+
+    /**
+     * Display the specified kategori.
+     */
+    public function show(Kategori $kategori)
+    {
+        $kategori->load(['barangs', 'pengadaans']);
+        return view('admin.kategoris.show', compact('kategori'));
+    }
+
+    /**
+     * Show the form for editing the specified kategori.
+     */
+    public function edit(Kategori $kategori)
+    {
+        return view('admin.kategoris.edit', compact('kategori'));
+    }
+
+    /**
+     * Update the specified kategori in storage.
+     */
+    public function update(Request $request, Kategori $kategori)
+    {
+        $validated = $request->validate([
+            'nama_kategori' => 'required|string|max:255|unique:categories,nama_kategori,' . $kategori->id,
         ]);
 
-        return redirect()->route('admin.kategori.index')
-            ->with('success', 'Kategori berhasil ditambahkan');
+        $kategori->update($validated);
+
+        return redirect()->route('admin.kategoris.index')
+            ->with('success', 'Kategori berhasil diperbarui.');
     }
 
-    public function show($id)
+    /**
+     * Remove the specified kategori from storage.
+     */
+    public function destroy(Kategori $kategori)
     {
-        $kategori = Kategori::findOrFail($id);
-        return view('admin.kategori.show', compact('kategori'));
-    }
+        // Check if kategori is being used
+        if ($kategori->barangs()->count() > 0 || $kategori->pengadaans()->count() > 0) {
+            return redirect()->route('admin.kategoris.index')
+                ->with('error', 'Kategori tidak dapat dihapus karena masih digunakan.');
+        }
 
-    public function edit($id)
-    {
-        $kategori = Kategori::findOrFail($id);
-        $categories = Kategori::pluck('deskripsi')->unique();
-        return view('admin.kategori.edit', compact('kategori', 'categories'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama_kategori' => 'required|string|max:255',
-            'deskripsi' => 'required|string|max:255',
-        ]);
-
-        $kategori = Kategori::findOrFail($id);
-        $kategori->update([
-            'nama_kategori' => $request->nama_kategori,
-            'deskripsi' => $request->deskripsi,
-        ]);
-
-        return redirect('/kategori')
-            ->with('success', 'Kategori berhasil diperbarui');
-    }
-
-    public function destroy($id)
-    {
-        $kategori = Kategori::findOrFail($id);
         $kategori->delete();
 
-        return redirect('/kategori')
-            ->with('success', 'Kategori berhasil dihapus');
+        return redirect()->route('admin.kategoris.index')
+            ->with('success', 'Kategori berhasil dihapus.');
     }
 }

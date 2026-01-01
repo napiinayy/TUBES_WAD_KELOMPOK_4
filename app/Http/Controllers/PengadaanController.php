@@ -14,9 +14,17 @@ class PengadaanController extends Controller
      */
     public function index()
     {
-        $pengadaans = Pengadaan::with(['lab', 'kategori'])
-            ->latest()
-            ->get();
+        // Filter by current user if aslab
+        if (auth()->user()->role === 'aslab') {
+            $pengadaans = Pengadaan::with(['lab', 'kategori'])
+                ->where('pengaju', auth()->user()->name)
+                ->latest()
+                ->get();
+        } else {
+            $pengadaans = Pengadaan::with(['lab', 'kategori'])
+                ->latest()
+                ->get();
+        }
         
         return view('aslab.pengadaan.index', compact('pengadaans'));
     }
@@ -26,7 +34,12 @@ class PengadaanController extends Controller
      */
     public function create()
     {
-        $kategoris = Kategori::all();
+        // Get unique kategoris by nama_kategori
+        $kategoris = Kategori::select('nama_kategori')
+            ->distinct()
+            ->whereNotNull('nama_kategori')
+            ->orderBy('nama_kategori')
+            ->get();
         $labs = Lab::all();
         
         return view('aslab.pengadaan.create', compact('kategoris', 'labs'));
@@ -38,7 +51,7 @@ class PengadaanController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'id_kategori' => 'required|exists:kategoris,id',
+            'kategori_barang' => 'required|string|max:255',
             'nama_barang' => 'required|string|max:255',
             'spesifikasi' => 'nullable|string',
             'id_lab' => 'required|exists:labs,id',
@@ -46,7 +59,15 @@ class PengadaanController extends Controller
             'alasan_pengadaan' => 'required|string',
         ]);
 
-        // Tambahkan field tambahan jika ada user yang login
+        // Find the kategori by nama_kategori to get the id
+        $kategori = Kategori::where('nama_kategori', $validated['kategori_barang'])->first();
+        
+        if (!$kategori) {
+            return back()->withErrors(['kategori_barang' => 'Kategori tidak ditemukan.'])->withInput();
+        }
+
+        // Tambahkan field tambahan
+        $validated['id_kategori'] = $kategori->id;
         $validated['pengaju'] = auth()->user()->name ?? 'Admin';
         $validated['status'] = 'pending'; // Default status
 
@@ -106,5 +127,44 @@ class PengadaanController extends Controller
 
         return redirect()->route('aslab.pengadaan.index')
             ->with('success', 'Data pengadaan berhasil dihapus.');
+    }
+
+    /**
+     * Update pengadaan status and auto-create kategori when approved
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:pending,approved,rejected,completed',
+        ]);
+
+        $pengadaan = Pengadaan::with('kategori')->findOrFail($id);
+        $oldStatus = $pengadaan->status;
+        $newStatus = $request->status;
+
+        $pengadaan->update(['status' => $newStatus]);
+
+        // Auto-create barang when status changes to approved
+        if ($newStatus === 'approved' && $oldStatus !== 'approved') {
+            // Check if barang with this name already exists
+            $existingBarang = \App\Models\Barang::where('nama_barang', $pengadaan->nama_barang)->first();
+            
+            if (!$existingBarang) {
+                \App\Models\Barang::create([
+                    'nama_barang' => $pengadaan->nama_barang,
+                    'deskripsi' => $pengadaan->spesifikasi ?? 'Barang dari pengadaan yang disetujui',
+                    'category_id' => $pengadaan->id_kategori,
+                ]);
+            }
+        }
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'status' => $pengadaan->status
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Status pengadaan berhasil diperbarui');
     }
 }

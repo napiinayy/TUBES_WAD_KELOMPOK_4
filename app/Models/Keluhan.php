@@ -15,5 +15,6 @@ class Keluhan extends Model
         'deskripsi_keluhan',
         'pelapor',
         'status',
+        'created_by',
     ];
 }

@@ -15,6 +15,7 @@ class Peminjaman extends Model
     // Kolom yang bisa diisi mass assignment
     protected $fillable = [
         'nama_barang',
+        'kategori_id',
         'id_lab',
         'kelas',
         'jumlah',
@@ -38,5 +39,23 @@ class Peminjaman extends Model
     public function lab()
     {
         return $this->belongsTo(Lab::class, 'id_lab');
+    }
+
+    /**
+     * Relasi ke tabel User (belongsTo)
+     * Digunakan di view: $peminjaman->user->nama_lengkap
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'peminjam', 'id');
+    }
+
+    /**
+     * Relasi ke tabel Kategori (belongsTo)
+     * Digunakan untuk memastikan item yang dipinjam berasal dari katalog pembelian
+     */
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 }

@@ -9,7 +9,7 @@ return new class extends Migration
     {
         Schema::create('pengadaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kategori')->constrained('kategoris')->onDelete('cascade');
+            $table->foreignId('id_kategori')->constrained('categories')->onDelete('cascade');
             $table->string('nama_barang');
             $table->text('spesifikasi')->nullable();
             $table->foreignId('id_lab')->constrained('labs')->onDelete('cascade');

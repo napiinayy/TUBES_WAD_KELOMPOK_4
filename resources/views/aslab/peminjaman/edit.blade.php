@@ -24,21 +24,27 @@
                         <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
+                        <a class="nav-link active" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -56,7 +62,7 @@
                                 <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('peminjaman.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Peminjaman Barang</a>
+                                <a href="{{ route('aslab.peminjaman.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Peminjaman Barang</a>
                             </li>
                             <li class="breadcrumb-item active">Edit</li>
                         </ol>
@@ -70,7 +76,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="{{ route('peminjaman.update', $peminjaman->id) }}">
+                    <form method="POST" action="{{ route('aslab.peminjaman.update', $peminjaman->id) }}">
                         @csrf
                         @method('PUT')
                         
@@ -78,17 +84,22 @@
                         <div class="form-section">
                             <h3 class="section-title">Detail Item</h3>
                             
-                            <!-- Nama Item -->
+                            <!-- Item dari Barang -->
                             <div class="form-group">
-                                <label for="nama_barang" class="form-label required">Nama Item</label>
-                                <input type="text" 
-                                       class="form-control @error('nama_barang') is-invalid @enderror" 
-                                       id="nama_barang" 
-                                       name="nama_barang" 
-                                       value="{{ old('nama_barang', $peminjaman->nama_barang) }}"
-                                       placeholder="Masukkan nama item"
-                                       required>
-                                @error('nama_barang')
+                                <label for="kategori_id" class="form-label required">Pilih Item</label>
+                                <select 
+                                    class="form-control @error('kategori_id') is-invalid @enderror" 
+                                    id="kategori_id" 
+                                    name="kategori_id" 
+                                    required>
+                                    <option value="">Pilih Item</option>
+                                    @foreach(($barangs ?? []) as $barang)
+                                        <option value="{{ $barang->id }}" {{ old('kategori_id', $peminjaman->kategori_id) == $barang->id ? 'selected' : '' }}>
+                                            {{ $barang->nama_barang }} ({{ $barang->kategori->nama_kategori ?? 'Tanpa Kategori' }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('kategori_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -198,7 +209,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="{{ route('peminjaman.index') }}" class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('aslab.peminjaman.index') }}" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-save me-2"></i>
                                 Simpan Perubahan

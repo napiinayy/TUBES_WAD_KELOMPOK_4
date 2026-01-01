@@ -18,27 +18,33 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Beranda</a>
+                        <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/aslab/pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/aslab/peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/admin/keluhan">Keluhan</a>
+                        <a class="nav-link active" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/kategori">Kategori Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/users">Profil</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -53,7 +59,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Pengajuan Keluhan</li>
                         </ol>
@@ -67,7 +73,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="/admin/keluhan">
+                    <form method="POST" action="{{ route('aslab.keluhan.store') }}">
                         @csrf
                         
                         <!-- Detail Keluhan Section -->
@@ -129,7 +135,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/admin/keluhan" class="btn btn-secondary">Kembali</a>
+                            <a href="{{ route('aslab.keluhan.index') }}" class="btn btn-secondary">Kembali</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-send me-2"></i>
                                 Kirim

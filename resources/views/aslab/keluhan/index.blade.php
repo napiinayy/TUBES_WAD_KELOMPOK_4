@@ -18,27 +18,33 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="dashboard">Beranda</a>
+                        <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pengadaan">Pengadaan Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="peminjaman">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="keluhan">Keluhan</a>
+                        <a class="nav-link active" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="kategori">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profil">Profil</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -53,7 +59,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="dashboard" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Keluhan</li>
                         </ol>
@@ -77,7 +83,7 @@
                 <div class="table-section-full">
                     <div class="table-header-actions">
                         <h3>Daftar Keluhan</h3>
-                        <a href="keluhan/create" class="btn btn-primary">
+                        <a href="{{ route('aslab.keluhan.create') }}" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
                             Tambah Keluhan
                         </a>
@@ -87,16 +93,10 @@
                             <table class="table dashboard-table mb-0">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="selectAll">
-                                            </div>
-                                        </th>
-                                        <th style="width: 10%;">ID Keluhan</th>
-                                        <th style="width: 25%;">Nama Item</th>
-                                        <th style="width: 15%;">Jenis Keluhan</th>
-                                        <th style="width: 15%;">Pelapor</th>
-                                        <th style="width: 12%;">Tanggal</th>
+                                        <th style="width: 12%;">ID Keluhan</th>
+                                        <th style="width: 35%;">Nama Item</th>
+                                        <th style="width: 20%;">Jenis Keluhan</th>
+                                        <th style="width: 15%;">Tanggal</th>
                                         <th style="width: 10%;">Status</th>
                                         <th style="width: 8%;" class="text-end">Actions</th>
                                     </tr>
@@ -104,29 +104,21 @@
                                 <tbody>
                                     @forelse($keluhans ?? [] as $keluhan)
                                     <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox">
-                                            </div>
-                                        </td>
                                         <td><span class="req-id">#KLH-{{ str_pad($keluhan->id, 4, '0', STR_PAD_LEFT) }}</span></td>
                                         <td><div class="item-name">{{ $keluhan->nama_item }}</div></td>
                                         <td><span class="date-text">{{ $keluhan->jenis_keluhan }}</span></td>
-                                        <td>
-                                            <div class="submitter-name">{{ $keluhan->pelapor }}</div>
-                                        </td>
                                         <td><span class="date-text">{{ $keluhan->created_at->format('M d, Y') }}</span></td>
                                         <td>
-                                            @if($keluhan->status == 'approved')
-                                                <span class="badge badge-approved">Approved</span>
-                                            @elseif($keluhan->status == 'rejected')
+                                            @if($keluhan->status === 'resolved')
+                                                <span class="badge badge-resolved">Resolved</span>
+                                            @elseif($keluhan->status === 'rejected')
                                                 <span class="badge badge-rejected">Rejected</span>
                                             @else
                                                 <span class="badge badge-pending">Pending</span>
                                             @endif
                                         </td>
                                         <td class="text-end">
-                                            <a href="keluhan/{{ $keluhan->id }}" class="action-btn" title="View">
+                                            <a href="{{ route('aslab.keluhan.show', $keluhan->id) }}" class="action-btn" title="View">
                                                 <i class="bi bi-eye"></i>
                                             </a>
                                             <button class="action-btn" title="Delete" onclick="confirmDelete({{ $keluhan->id }})">
@@ -136,10 +128,10 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <td colspan="8" class="text-center py-4">
+                                        <td colspan="6" class="text-center py-4">
                                             <i class="bi bi-inbox" style="font-size: 3rem; color: #ccc;"></i>
                                             <p class="mt-2 text-muted">Belum ada keluhan</p>
-                                            <a href="keluhan/create" class="btn btn-primary btn-sm mt-2">
+                                            <a href="{{ route('aslab.keluhan.create') }}" class="btn btn-primary btn-sm mt-2">
                                                 <i class="bi bi-plus-circle me-1"></i>
                                                 Tambah Keluhan Pertama
                                             </a>
@@ -173,7 +165,8 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus keluhan ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = 'keluhan/' + id;
+                const baseUrl = '{{ route("aslab.keluhan.destroy", ":id") }}';
+                form.action = baseUrl.replace(':id', id);
                 form.submit();
             }
         }

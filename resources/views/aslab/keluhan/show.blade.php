@@ -24,21 +24,27 @@
                         <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        <a class="nav-link active" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
             
             <div class="sidebar-footer">
+                <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 16px;">
+                    @csrf
+                    <button type="submit" class="nav-link logout-btn" style="width: 100%; text-align: left; background: transparent; border: 1px solid #08A045; cursor: pointer;">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
                 <p class="version-info">LabMan v2.4.0</p>
                 <p class="copyright">© 2023 Science Dept.</p>
             </div>
@@ -56,7 +62,7 @@
                                 <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('admin.keluhan.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Keluhan</a>
+                                <a href="{{ route('aslab.keluhan.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Keluhan</a>
                             </li>
                             <li class="breadcrumb-item active">Detail</li>
                         </ol>
@@ -138,7 +144,8 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus keluhan ini?')) {
                 const form = document.getElementById('deleteForm');
-                form.action = 'keluhan/' + id;
+                const baseUrl = '{{ route("aslab.keluhan.destroy", ":id") }}';
+                form.action = baseUrl.replace(':id', id);
                 form.submit();
             }
         }

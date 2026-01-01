@@ -43,9 +43,12 @@ body {
   align-items: flex-start;
   padding: 16px;
   width: 288px;
-  min-height: 100vh;
+  height: 100vh;
   background: #FFFFFF;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 
   .nav-container {
     display: flex;
@@ -811,27 +814,75 @@ select.form-control {
 }
 
 .status-available {
-  background-color: #198754;
+  background-color: #2c3e50;
   color: white;
 }
 
 .status-borrowed {
-  background-color: #dc3545;
+  background-color: #1a1a1a;
   color: white;
 }
 
 .status-pending {
-  background-color: #ffc107;
-  color: #212529;
-}
-
-.status-approved {
-  background-color: #198754;
+  background-color: #34495e;
   color: white;
 }
 
-.status-rejected {
-  background-color: #dc3545;
+.status-approved,
+.badge-success {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.status-rejected,
+.badge-danger {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.status-dipinjam {
+  background-color: #34495e;
+  color: white;
+}
+
+.badge-warning {
+  background-color: #34495e;
+  color: white;
+}
+
+.badge-approved {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.badge-rejected {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.badge-pending {
+  background-color: #34495e;
+  color: white;
+}
+
+.badge-resolved {
+  background-color: #08A045;
+  color: white;
+}
+
+// Contrasting colors for peminjaman status badges
+.badge-dipinjam {
+  background-color: #3498db;
+  color: white;
+}
+
+.badge-dikembalikan {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.badge-terlambat {
+  background-color: #e74c3c;
   color: white;
 }
 
@@ -928,6 +979,96 @@ select.form-control {
   font-weight: bold;
   font-family: 'Space Grotesk', sans-serif;
   margin-bottom: 32px;
+}
+
+// Statistics Cards
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #08A045;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  i {
+    font-size: 24px;
+    color: white;
+  }
+}
+
+.stat-content {
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #444444;
+    margin: 0;
+  }
+  
+  p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+  }
+}
+
+// Latest Entries Container
+.latest-entries-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.table-header-admin {
+  background: white;
+  padding: 16px 24px;
+  border: 1px solid #324D67;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #444444;
+    margin: 0;
+  }
+}
+
+.view-all-link {
+  color: #08A045;
+  text-decoration: none;
+  font-size: 20px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: #066b35;
+    transform: translateX(3px);
+  }
 }
 
 .page-header-with-action {
@@ -1094,6 +1235,10 @@ select.form-control {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 
 .admin-nav-container {
@@ -1181,6 +1326,8 @@ select.form-control {
   .sidebar {
     width: 100%;
     min-height: auto;
+    height: auto;
+    position: relative;
   }
 
   .content-wrapper {

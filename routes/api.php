@@ -18,3 +18,4 @@ Route::apiResource('kategori', KategoriController::class);
 
 // API for Keluhan
 Route::apiResource('keluhan', KeluhanController::class);
+Route::patch('keluhan/{id}/status', [KeluhanController::class, 'updateStatus']);

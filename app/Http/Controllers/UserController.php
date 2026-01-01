@@ -32,6 +32,53 @@ class UserController extends Controller
     }
 
     /**
+     * Display the admin dashboard.
+     */
+    public function dashboard()
+    {
+        // Get latest 3 users
+        $latestUsers = User::with('laboratorium')
+            ->where('role', '!=', 'super_admin')
+            ->latest()
+            ->take(3)
+            ->get()
+            ->map(function ($user) {
+                $user->lab_name = $user->laboratorium->nama_lab ?? '-';
+                return $user;
+            });
+
+        // Get latest 3 barang items
+        $latestBarangs = \App\Models\Barang::with('kategori')->latest()->take(3)->get();
+
+        // Get latest 3 complaints
+        $latestKeluhans = Keluhan::latest()->take(3)->get();
+
+        // Get counts for infographics
+        $totalUsers = User::where('role', '!=', 'super_admin')->count();
+        $totalBarangs = \App\Models\Barang::count();
+        $totalKeluhans = Keluhan::where('status', 'pending')->count();
+
+        // Get latest pengadaan and peminjaman for existing tables
+        $pengadaan = Pengadaan::with('lab')->latest()->take(5)->get();
+        $peminjaman = Peminjaman::with(['user', 'lab'])->latest()->take(5)->get();
+        // Filter to ensure we only pass valid model instances to the view table
+        // Load all keluhan for the admin table so the list stays in sync
+        $keluhan = Keluhan::latest()->get();
+
+        return view('admin.dashboard', compact(
+            'latestUsers',
+            'latestBarangs', 
+            'latestKeluhans',
+            'totalUsers',
+            'totalBarangs',
+            'totalKeluhans',
+            'pengadaan',
+            'peminjaman',
+            'keluhan'
+        ));
+    }
+
+    /**
      * Show the form for creating a new user.
      */
     public function create()
@@ -50,7 +97,8 @@ class UserController extends Controller
             'kode_aslab' => 'required|string|max:50|unique:users,kode_aslab',
             'email' => 'nullable|email|max:255|unique:users,email',
             'username' => 'required|string|max:100|unique:users,username',
-            'id_lab' => 'nullable|exists:labs,id',
+            'id_lab' => 'nullable|array',
+            'id_lab.*' => 'exists:labs,id',
             'jurusan' => 'nullable|string|max:100',
             'role' => 'required|in:aslab,admin',
             'password' => 'required|string|min:8|confirmed',
@@ -62,18 +110,26 @@ class UserController extends Controller
             $validated['jurusan'] = null;
         } elseif ($validated['role'] === 'aslab') {
             $request->validate([
-                'id_lab' => 'required|exists:labs,id',
+                'id_lab' => 'required|array|min:1',
+                'id_lab.*' => 'exists:labs,id',
                 'jurusan' => 'required|string|max:100',
             ]);
         }
 
         $validated['password'] = Hash::make($validated['password']);
+        
+        // Set name field from nama_lengkap for database compatibility
+        $validated['name'] = $validated['nama_lengkap'];
+        
+        // Store first lab in id_lab for backward compatibility
+        $labIds = $validated['id_lab'] ?? [];
+        $validated['id_lab'] = !empty($labIds) ? $labIds[0] : null;
 
         $user = User::create($validated);
 
-        // Attach lab for aslab
-        if ($validated['role'] === 'aslab' && $validated['id_lab']) {
-            $user->labs()->attach($validated['id_lab']);
+        // Attach all labs for aslab
+        if ($validated['role'] === 'aslab' && !empty($labIds)) {
+            $user->labs()->attach($labIds);
         }
 
         return redirect()
@@ -102,7 +158,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('labs')->findOrFail($id);
         $labs = Lab::all();
         
         return view('admin.users.edit', compact('user', 'labs'));
@@ -114,6 +170,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
+        
+        // Check if aslab is editing their own profile
+        $isAslabEditingSelf = auth()->user()->role === 'aslab' && auth()->id() == $id;
 
         $validated = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
@@ -135,22 +194,42 @@ class UserController extends Controller
                 'max:100',
                 Rule::unique('users', 'username')->ignore($user->id)
             ],
-            'id_lab' => 'nullable|exists:labs,id', // Make nullable
-            'jurusan' => 'nullable|string|max:100', // Make nullable
-            'role' => 'required|in:aslab,admin',
+            'id_lab' => $isAslabEditingSelf ? 'nullable|array' : 'nullable|array',
+            'id_lab.*' => 'exists:labs,id',
+            'jurusan' => $isAslabEditingSelf ? 'nullable|string|max:100' : 'nullable|string|max:100',
+            'role' => $isAslabEditingSelf ? 'nullable|in:aslab,admin' : 'required|in:aslab,admin',
             'password' => 'nullable|string|min:8|confirmed',
         ]);
-
-        // For admins, set id_lab and jurusan to null
-        if ($validated['role'] === 'admin') {
-            $validated['id_lab'] = null;
-            $validated['jurusan'] = null;
-        } elseif ($validated['role'] === 'aslab') {
-            // For aslabs, ensure id_lab and jurusan are provided
-            $request->validate([
-                'id_lab' => 'required|exists:labs,id',
-                'jurusan' => 'required|string|max:100',
-            ]);
+        
+        // If aslab is editing their own profile, preserve academic information
+        if ($isAslabEditingSelf) {
+            // Keep existing role, lab, and jurusan
+            $validated['role'] = $user->role;
+            $validated['jurusan'] = $user->jurusan;
+            // Don't update labs
+            unset($validated['id_lab']);
+        } else {
+            // Admin updating user - process normally
+            // For admins, set id_lab and jurusan to null
+            if ($validated['role'] === 'admin') {
+                $validated['id_lab'] = null;
+                $validated['jurusan'] = null;
+                $user->labs()->detach();
+            } elseif ($validated['role'] === 'aslab') {
+                // For aslabs, ensure id_lab and jurusan are provided
+                $request->validate([
+                    'id_lab' => 'required|array|min:1',
+                    'id_lab.*' => 'exists:labs,id',
+                    'jurusan' => 'required|string|max:100',
+                ]);
+                
+                // Sync labs for aslab
+                $labIds = $validated['id_lab'];
+                $user->labs()->sync($labIds);
+                
+                // Store first lab in id_lab for backward compatibility
+                $validated['id_lab'] = $labIds[0];
+            }
         }
 
         // Only update password if provided
@@ -160,11 +239,49 @@ class UserController extends Controller
             unset($validated['password']);
         }
 
+        // Set name field from nama_lengkap for database compatibility
+        $validated['name'] = $validated['nama_lengkap'];
+
         $user->update($validated);
+
+        // Redirect based on who is updating
+        if (auth()->id() == $id && auth()->user()->role === 'aslab') {
+            return redirect()
+                ->route('admin.users.edit', $id)
+                ->with('success', 'Profil berhasil diperbarui');
+        }
 
         return redirect()
             ->route('admin.users.index')
             ->with('success', 'Pengguna berhasil diperbarui');
+    }
+
+    /**
+     * Store a new lab via AJAX.
+     */
+    public function storeLab(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_lab' => 'required|string|max:255|unique:labs,nama_lab',
+        ]);
+
+        try {
+            // Auto-generate kode_lab from nama_lab (first 3 letters + random number)
+            $validated['kode_lab'] = strtoupper(substr($validated['nama_lab'], 0, 3)) . '-' . random_int(1000, 9999);
+            
+            $lab = Lab::create($validated);
+
+            return response()->json([
+                'success' => true,
+                'lab' => $lab,
+                'message' => 'Lab berhasil ditambahkan'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
