@@ -19,13 +19,13 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/home">Beranda</a>
+                        <a class="nav-link active" href="{{ route('home') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
+                        <a class="nav-link" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
@@ -34,7 +34,7 @@
                         <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -68,7 +68,7 @@
                         <div class="table-section">
                             <div class="table-header-admin">
                                 <h3>Peminjaman Barang Terbaru</h3>
-                                <a href="{{ route('peminjaman.index') }}" class="view-all-link">
+                                <a href="{{ route('aslab.peminjaman.index') }}" class="view-all-link">
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
                             </div>

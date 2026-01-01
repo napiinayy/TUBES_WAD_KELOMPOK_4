@@ -37,6 +37,7 @@ class UserController extends WebUserController
         ]);
 
         $validated['password'] = bcrypt($validated['password']);
+        $validated['name'] = $validated['nama_lengkap']; // Set name to nama_lengkap
 
         $user = User::create($validated);
 
@@ -90,6 +91,7 @@ class UserController extends WebUserController
             unset($validated['password']);
         }
 
+        $validated['name'] = $validated['nama_lengkap']; // Set name to nama_lengkap
         $user->update($validated);
 
         return response()->json($user);

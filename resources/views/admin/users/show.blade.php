@@ -17,24 +17,47 @@
         <aside class="sidebar">
             <div class="nav-container">
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/barang">Daftar Barang</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
-                    </li>
+                    @if(auth()->user()->role === 'admin' || auth()->user()->role === 'super_admin')
+                        {{-- Admin Sidebar --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ $user->id == auth()->id() ? '' : 'active' }}" href="{{ route('admin.users.index') }}">Kelola Profil Pengguna</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.barang.index') }}">Daftar Barang</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ $user->id == auth()->id() ? 'active' : '' }}" href="{{ route('profile') }}">Profil</a>
+                        </li>
+                    @else
+                        {{-- Aslab Sidebar --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Beranda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('profile') }}">Profil</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
             
@@ -59,19 +82,23 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
+                                <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">
+                                    {{ auth()->user()->role === 'admin' || auth()->user()->role === 'super_admin' ? 'Dashboard' : 'Beranda' }}
+                                </a>
                             </li>
+                            @if($user->id != auth()->id())
                             <li class="breadcrumb-item">
-                                <a href="/admin/users" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
+                                <a href="{{ route('admin.users.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
                             </li>
-                            <li class="breadcrumb-item active">Detail</li>
+                            @endif
+                            <li class="breadcrumb-item active">{{ $user->id == auth()->id() ? 'Profil Saya' : 'Detail Pengguna' }}</li>
                         </ol>
                     </nav>
                 </div>
                 
                 <!-- Page Header -->
                 <div class="page-header">
-                    <h1>Detail Pengguna</h1>
+                    <h1>{{ $user->id == auth()->id() ? 'Profil Saya' : 'Detail Pengguna' }}</h1>
                 </div>
                 
                 <!-- Detail Card -->
@@ -157,19 +184,28 @@
                     
                     <!-- Detail Footer -->
                     <div class="detail-footer">
-                        <a href="/admin/users" class="btn btn-secondary">
+                        @if($user->id != auth()->id())
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
                             <i class="bi bi-arrow-left me-2"></i>
                             Kembali
                         </a>
+                        @else
+                        <a href="{{ route('home') }}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>
+                            Kembali ke Dashboard
+                        </a>
+                        @endif
                         <div class="detail-actions">
-                            <a href="/admin/users/{{ $user->id }}/edit" class="btn btn-primary">
+                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary">
                                 <i class="bi bi-pencil me-2"></i>
-                                Edit
+                                Edit Profil
                             </a>
+                            @if($user->id != auth()->id())
                             <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $user->id }})">
                                 <i class="bi bi-trash me-2"></i>
                                 Hapus
                             </button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -188,7 +224,8 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus pengguna ini?\n\nPeringatan: Semua data terkait akan ikut terhapus.')) {
                 const form = document.getElementById('deleteForm');
-                form.action = '/admin/users/' + id;
+                const baseUrl = '{{ route("admin.users.destroy", ":id") }}';
+                form.action = baseUrl.replace(':id', id);
                 form.submit();
             }
         }

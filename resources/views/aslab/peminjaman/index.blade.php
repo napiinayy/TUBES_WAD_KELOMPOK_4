@@ -24,7 +24,7 @@
                         <a class="nav-link" href="{{ route('aslab.pengadaan.index') }}">Pengadaan Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('peminjaman.index') }}">Peminjaman Barang</a>
+                        <a class="nav-link active" href="{{ route('aslab.peminjaman.index') }}">Peminjaman Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('aslab.keluhan.index') }}">Keluhan</a>
@@ -33,7 +33,7 @@
                         <a class="nav-link" href="{{ route('aslab.barang.index') }}">Katalog Barang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
+                        <a class="nav-link" href="{{ route('profile') }}">Profil</a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@
                 <div class="table-section-full">
                     <div class="table-header-actions">
                         <h3>Peminjaman Barang</h3>
-                        <a href="{{ route('peminjaman.create') }}" class="btn btn-primary">
+                        <a href="{{ route('aslab.peminjaman.create') }}" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
                             Tambah Peminjaman
                         </a>
@@ -112,10 +112,10 @@
                                         <td><span class="quantity-badge">{{ $peminjaman->jumlah }}</span></td>
                                         <td><span class="badge badge-{{ strtolower($peminjaman->status ?? 'dipinjam') }}">{{ ucfirst($peminjaman->status ?? 'Dipinjam') }}</span></td>
                                         <td class="text-end">
-                                            <a href="{{ route('peminjaman.show', $peminjaman->id) }}" class="action-btn" title="View">
+                                            <a href="{{ route('aslab.peminjaman.show', $peminjaman->id) }}" class="action-btn" title="View">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                            <a href="{{ route('peminjaman.edit', $peminjaman->id) }}" class="action-btn" title="Edit">
+                                            <a href="{{ route('aslab.peminjaman.edit', $peminjaman->id) }}" class="action-btn" title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
                                             <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $peminjaman->id }})">
@@ -157,7 +157,7 @@
         function confirmDelete(id) {
             if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
                 const form = document.getElementById('deleteForm');
-                const baseUrl = '{{ route("peminjaman.destroy", ":id") }}';
+                const baseUrl = '{{ route("aslab.peminjaman.destroy", ":id") }}';
                 form.action = baseUrl.replace(':id', id);
                 form.submit();
             }

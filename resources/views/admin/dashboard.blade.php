@@ -338,19 +338,19 @@
             <div class="admin-nav-container">
                 <ul class="admin-nav">
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link active" href="/home">Dashboard</a>
+                        <a class="admin-nav-link active" href="{{ route('home') }}">Dashboard</a>
                     </li>
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link" href="/admin/users">Kelola Profil Pengguna</a>
+                        <a class="admin-nav-link" href="{{ route('admin.users.index') }}">Kelola Profil Pengguna</a>
                     </li>
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link" href="/admin/barang">Daftar Barang</a>
+                        <a class="admin-nav-link" href="{{ route('admin.barang.index') }}">Daftar Barang</a>
                     </li>
                     <li class="admin-nav-item">
                         <a class="admin-nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
                     </li>
                     <li class="admin-nav-item">
-                        <a class="admin-nav-link" href="/admin/keluhan">Keluhan</a>
+                        <a class="admin-nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="admin-nav-item">
                         <a class="admin-nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>

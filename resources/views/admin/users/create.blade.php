@@ -22,19 +22,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Dashboard</a>
+                        <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link active" href="{{ route('admin.users.index') }}">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/barang">Daftar Barang</a>
+                        <a class="nav-link" href="{{ route('admin.barang.index') }}">Daftar Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
@@ -63,10 +63,10 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
+                                <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Dashboard</a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="/admin/users" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
+                                <a href="{{ route('admin.users.index') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Kelola Profil Pengguna</a>
                             </li>
                             <li class="breadcrumb-item active">Tambah Pengguna</li>
                         </ol>
@@ -255,7 +255,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/admin/users" class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-save me-2"></i>
                                 Simpan

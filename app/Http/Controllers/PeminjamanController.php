@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Filter by current user if aslab
         if (auth()->user()->role === 'aslab') {
@@ -20,6 +20,7 @@ class PeminjamanController extends Controller
         } else {
             $peminjamans = Peminjaman::with(['lab', 'user'])->latest()->get();
         }
+
         return view('aslab.peminjaman.index', compact('peminjamans'));
     }
 
@@ -56,25 +57,25 @@ class PeminjamanController extends Controller
 
         Peminjaman::create($validated);
 
-        return redirect()->route('peminjaman.index')
+        return redirect()->route('aslab.peminjaman.index')
                          ->with('success', 'Peminjaman berhasil diajukan!');
     }
 
-    public function show($id)
+    public function show($peminjaman)
     {
-        $peminjaman = Peminjaman::with(['lab', 'user'])->findOrFail($id);
+        $peminjaman = Peminjaman::with(['lab', 'user'])->findOrFail($peminjaman);
         return view('aslab.peminjaman.show', compact('peminjaman'));
     }
 
-    public function edit($id)
+    public function edit($peminjaman)
     {
-        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman = Peminjaman::findOrFail($peminjaman);
         $labs = Lab::all();
         $barangs = Barang::with('kategori')->orderBy('nama_barang')->get();
         return view('aslab.peminjaman.edit', compact('peminjaman', 'labs', 'barangs'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $peminjaman)
     {
         $validated = $request->validate([
             'kategori_id' => 'required|exists:kategoris,id',
@@ -89,19 +90,19 @@ class PeminjamanController extends Controller
         $barang = Barang::findOrFail($validated['kategori_id']);
         $validated['nama_barang'] = $barang->nama_barang;
 
-        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman = Peminjaman::findOrFail($peminjaman);
         $peminjaman->update($validated);
 
-        return redirect()->route('peminjaman.index')
+        return redirect()->route('aslab.peminjaman.index')
                          ->with('success', 'Data peminjaman berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy($peminjaman)
     {
-        $peminjaman = Peminjaman::findOrFail($id);
+        $peminjaman = Peminjaman::findOrFail($peminjaman);
         $peminjaman->delete();
 
-        return redirect()->route('peminjaman.index')
+        return redirect()->route('aslab.peminjaman.index')
                          ->with('success', 'Data peminjaman berhasil dihapus!');
     }
     

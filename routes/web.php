@@ -20,6 +20,11 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     
+    // Profile route (for both admin and aslab)
+    Route::get('/profile', function() {
+        return redirect()->route('admin.users.show', auth()->id());
+    })->name('profile');
+    
     // Admin routes
     Route::get('/admin/dashboard', [UserController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/admin/labs/store', [UserController::class, 'storeLab'])->name('admin.labs.store');
@@ -39,15 +44,7 @@ Route::middleware(['auth'])->group(function () {
     // Aslab keluhan status-only update
     Route::patch('aslab/keluhan/{id}/status', [KeluhanController::class, 'updateStatus'])->name('aslab.keluhan.updateStatus');
 
-    Route::prefix('aslab/peminjaman')->group(function () {
-        Route::get('/', [PeminjamanController::class, 'index'])->name('peminjaman.index');
-        Route::get('/create', [PeminjamanController::class, 'create'])->name('peminjaman.create');
-        Route::post('/', [PeminjamanController::class, 'store'])->name('peminjaman.store');
-        Route::get('/{id}', [PeminjamanController::class, 'show'])->name('peminjaman.show');
-        Route::get('/{id}/edit', [PeminjamanController::class, 'edit'])->name('peminjaman.edit');
-        Route::put('/{id}', [PeminjamanController::class, 'update'])->name('peminjaman.update');
-        Route::delete('/{id}', [PeminjamanController::class, 'destroy'])->name('peminjaman.destroy');
-    });
+    Route::resource('aslab/peminjaman', PeminjamanController::class)->names('aslab.peminjaman');
     
     // Admin peminjaman status update
     Route::patch('admin/peminjaman/{id}/status', [PeminjamanController::class, 'updateStatus'])->name('admin.peminjaman.updateStatus');

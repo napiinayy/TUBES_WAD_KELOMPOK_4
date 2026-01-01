@@ -22,7 +22,7 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">
+                        <a class="nav-link" href="{{ route('home') }}">
                             Beranda
                         </a>
                     </li>
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('peminjaman.index') }}">
+                        <a class="nav-link active" href="{{ route('aslab.peminjaman.index') }}">
                             Peminjaman Barang
                         </a>
                     </li>
@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">
+                        <a class="nav-link" href="{{ route('profile') }}">
                             Profil
                         </a>
                     </li>
@@ -75,7 +75,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="/home" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
+                                <a href="{{ route('home') }}" class="text-decoration-none" style="color: rgba(0, 0, 0, 0.6);">Beranda</a>
                             </li>
                             <li class="breadcrumb-item active">Peminjaman Barang</li>
                         </ol>
@@ -89,7 +89,7 @@
                 
                 <!-- Form Card -->
                 <div class="form-card">
-                    <form method="POST" action="{{ route('peminjaman.store') }}">
+                    <form method="POST" action="{{ route('aslab.peminjaman.store') }}">
                         @csrf
                         
                         <!-- Detail Item Section -->
@@ -229,7 +229,7 @@
                         
                         <!-- Form Footer -->
                         <div class="form-footer">
-                            <a href="/home" class="btn btn-secondary">
+                            <a href="{{ route('home') }}" class="btn btn-secondary">
                                 Kembali
                             </a>
                             <button type="submit" class="btn btn-primary">

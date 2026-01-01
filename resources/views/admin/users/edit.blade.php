@@ -22,19 +22,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Dashboard</a>
+                        <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link active" href="{{ route('admin.users.index') }}">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/barang">Daftar Barang</a>
+                        <a class="nav-link" href="{{ route('admin.barang.index') }}">Daftar Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>

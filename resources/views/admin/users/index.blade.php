@@ -19,19 +19,19 @@
             <div class="nav-container">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Dashboard</a>
+                        <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/admin/users">Kelola Profil Pengguna</a>
+                        <a class="nav-link active" href="{{ route('admin.users.index') }}">Kelola Profil Pengguna</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/barang">Daftar Barang</a>
+                        <a class="nav-link" href="{{ route('admin.barang.index') }}">Daftar Barang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.kategoris.index') }}">Kelola Kategori</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/keluhan">Keluhan</a>
+                        <a class="nav-link" href="{{ route('admin.keluhan.index') }}">Keluhan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.users.edit', auth()->id()) }}">Profil</a>
@@ -72,7 +72,7 @@
                 <div class="table-section-full">
                     <div class="table-header-actions">
                         <h3>Daftar Pengguna</h3>
-                        <a href="/admin/users/create" class="btn btn-primary">
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
                             <i class="bi bi-plus-circle me-2"></i>
                             Tambah Pengguna
                         </a>
@@ -98,10 +98,10 @@
                                             <td><span class="date-text">{{ $user->lab_name ?? '-' }}</span></td>
                                             <td><span class="date-text">{{ $user->jurusan }}</span></td>
                                             <td class="text-end">
-                                                <a href="/admin/users/{{ $user->id }}" class="action-btn" title="View">
+                                                <a href="{{ route('admin.users.show', $user->id) }}" class="action-btn" title="View">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                                <a href="/admin/users/{{ $user->id }}/edit" class="action-btn" title="Edit">
+                                                <a href="{{ route('admin.users.edit', $user->id) }}" class="action-btn" title="Edit">
                                                     <i class="bi bi-pencil"></i>
                                                 </a>
                                                 <button type="button" class="action-btn" title="Delete" onclick="confirmDelete({{ $user->id }})">
